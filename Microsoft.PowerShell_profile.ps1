@@ -64,3 +64,9 @@ function InstallChoco {
 
     Write-Host "Installing Choco..."
 }
+
+
+function Q {
+
+    Clear-Host
+}
