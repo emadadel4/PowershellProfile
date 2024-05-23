@@ -25,7 +25,8 @@ Profile-Links [github] [itt] [telegram]
 
 function Get-IP {
     ipconfig | findstr "IPv4"
-}
+
+   
 
 # Function to quickly navigate to commonly used directories
 function Go-To {
