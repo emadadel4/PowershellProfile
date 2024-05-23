@@ -44,11 +44,19 @@ function Profile-Links {
         [string]$dir
     )
     switch ($dir) {
-        "github" { Start-Process ("https://github.com/emadadel4/ITT") }
+        "github" { Start-Process ("https://github.com/emadadel4") }
         "itt" { Start-Process ("https://github.com/emadadel4/ITT") }
         "telegram" { Start-Process ("https://t.me/emadadel4") }
 
-        default { Write-Host "alias not found" }
+        "help" { 
+
+            Write-Host "[github] = open Emad Adel Github profile"     
+            Write-Host "[itt] = open ITT Github Link"       
+            Write-Host "[telegram] = open Emad Adel telegram profile"       
+
+        }
+
+        default { Write-Host "there no command like that" }
     }
 }
 
