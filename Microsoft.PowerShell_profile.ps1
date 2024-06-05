@@ -1,7 +1,7 @@
 & ([ScriptBlock]::Create((oh-my-posh init pwsh --config "$env:POSH_THEMES_PATH\json.omp.json" --print) -join "`n"))
 
     if (-not (Get-Module -Name Terminal-Icons -ListAvailable)) {
-        Install-Module -Name Terminal-Icons -Scope CurrentUser
+        Install-Module -Name Terminal-Icons -Repository PSGallery
     }
     else
     {
