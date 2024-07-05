@@ -28,7 +28,9 @@ function emad {
     [CmdletBinding()]
     param (
         [string]$Go,
+        [string]$Test,
         [string]$open,
+        [string]$Install,
         [switch]$Help,
         [string]$Options
     )
@@ -38,6 +40,8 @@ function emad {
         Write-Host "The following commands are available:"
         Write-Host "  -open         Specifies where to navigate. Available options: 'github' or 'itt' or 'telegram'."
         Write-Host "  -go           Specifies where to navigate. Available options: 'desktop' or 'itt repo'."
+        Write-Host "  -test         Check internet A ping Test"
+        Write-Host "  -install      Install program's"
         Write-Host "  -Help         Display this help message."
         return
     }
@@ -66,9 +70,30 @@ function emad {
         "itt" { 
             Set-Location "C:\Users\$env:USERNAME\Documents\Github\ITT" 
         }
+
+        "website" { 
+            Set-Location "C:\Users\$env:USERNAME\Documents\Github\emadadel4.github.io" 
+        }
     }
 
-  
+    switch ($Test) 
+    {
+        "ping" { 
+            ping www.google.com -t
+        }
+    }
+
+    switch ($Install) 
+    {
+        "choco" { 
+            Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1')) *> $null
+        }
+    }
+}
+
+function Q
+{
+    Clear-Host
 }
 
 
