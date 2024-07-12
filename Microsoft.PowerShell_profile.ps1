@@ -96,4 +96,16 @@ function Q
     Clear-Host
 }
 
+function ch {
+
+    $historyFilePath = "$env:USERPROFILE\AppData\Roaming\Microsoft\Windows\PowerShell\PSReadLine\ConsoleHost_history.txt"
+    
+    if (Test-Path $historyFilePath) {
+        Remove-Item $historyFilePath -Force
+    } else {
+        Write-Output "ConsoleHost_history.txt not found."
+    }
+}
+
+
 
