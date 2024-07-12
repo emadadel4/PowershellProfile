@@ -32,7 +32,9 @@ function emad {
         [string]$open,
         [string]$Install,
         [switch]$Help,
-        [string]$Options
+        [string]$Options,
+        [string]$run
+
     )
 
     if ($Help) {
@@ -73,6 +75,13 @@ function emad {
 
         "website" { 
             Set-Location "C:\Users\$env:USERNAME\Documents\Github\emadadel4.github.io" 
+        }
+    }
+
+    switch ($run) 
+    {
+        "itt" { 
+            irm bit.ly/emadadel | iex 
         }
     }
 
