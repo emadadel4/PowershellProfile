@@ -88,7 +88,17 @@ function emad {
     switch ($Test) 
     {
         "ping" { 
-            ping www.google.com -t
+            
+            $defaultRoute = Get-NetRoute -DestinationPrefix "0.0.0.0/0" | Select-Object -First 1
+
+            if ($defaultRoute) {
+                $gateway = $defaultRoute.NextHop
+                ping $gateway -t
+            }
+            else
+            {
+                Write-Output "No default gateway found."
+            }
         }
     }
 
@@ -115,6 +125,3 @@ function ch {
         Write-Output "ConsoleHost_history.txt not found."
     }
 }
-
-
-
