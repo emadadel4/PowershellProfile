@@ -1,11 +1,11 @@
 
 if (-not (Get-Command choco -ErrorAction SilentlyContinue)) 
 {
-    Write-Output "Setup my powershell profile... "
+    Write-Host "Setup my powershell profile... " -ForegroundColor Yellow
     Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
     choco install oh-my-posh --confirm --acceptlicense -q -r --ignore-http-cache --allowemptychecksumsecure --allowemptychecksum --usepackagecodes --ignoredetectedreboot --ignore-checksums --ignore-reboot-requests
-    Write-Output "Restart the treminal "
-    return
+    #Write-Output "Restart the treminal "
+    Clear-Host
 }
 
 & ([ScriptBlock]::Create((oh-my-posh init pwsh --config "$env:POSH_THEMES_PATH\json.omp.json" --print) -join "`n"))
