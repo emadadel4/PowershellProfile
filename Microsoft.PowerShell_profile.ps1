@@ -27,7 +27,7 @@
 function emad {
     [CmdletBinding()]
     param (
-        [string]$Go,
+        [string]$cd,
         [string]$Test,
         [string]$open,
         [string]$Install,
@@ -40,10 +40,12 @@ function emad {
     if ($Help) {
         Write-Host "usage: emad  [<command>] [<options>]  `n` "
         Write-Host "The following commands are available:"
-        Write-Host "  -open         Specifies where to navigate. Available options: 'github' or 'itt' or 'telegram'."
-        Write-Host "  -go           Specifies where to navigate. Available options: 'desktop' or 'itt repo'."
+        Write-Host "  -open         Specifies where to navigate. Available options: 'github' or 'itt' or 'telegram' 'exhdd'"
+        Write-Host "  -cd           Specifies where to navigate. Available options: 'desktop' or 'itt repo'."
         Write-Host "  -test         Check internet A ping Test"
         Write-Host "  -install      Install program's"
+        Write-Host "  ch            Clear commands history"
+        Write-Host "  q             Clear-Host"
         Write-Host "  -Help         Display this help message."
         return
     }
@@ -53,17 +55,28 @@ function emad {
         "github" { 
             Start-Process ("https://github.com/emadadel4") 
         }
-
         "itt" { 
             Start-Process ("https://github.com/emadadel4/itt") 
         }
         "telegram" { 
             Start-Process ("https://t.me/emadadel4") 
         }
-
+        "133" { 
+            Start-Process ("https://1337x.to") 
+        }
+        "fast" { 
+            Start-Process ("https://fast.com") 
+        }"yt" { 
+            Start-Process ("https://youtube.com") 
+        }
+        "exhdd" { 
+            Start-Process ("D:\") 
+        }
+        "doc" { 
+            Start-Process ("C:\Users\$env:USERNAME\Documents") 
+        }
     }
-
-    switch ($go) 
+    switch ($cd) 
     {
         "desktop" { 
             Set-Location "C:\Users\$env:USERNAME\Desktop"
@@ -81,14 +94,13 @@ function emad {
     switch ($run) 
     {
         "itt" { 
-            irm bit.ly/emadadel | iex 
+            irm bit.ly/ittea | iex 
         }
     }
 
     switch ($Test) 
     {
         "ping" { 
-            
             $defaultRoute = Get-NetRoute -DestinationPrefix "0.0.0.0/0" | Select-Object -First 1
 
             if ($defaultRoute) {
@@ -121,6 +133,7 @@ function ch {
     
     if (Test-Path $historyFilePath) {
         Remove-Item $historyFilePath -Force
+        Write-Output "Commands history cleard!"
     } else {
         Write-Output "ConsoleHost_history.txt not found."
     }
