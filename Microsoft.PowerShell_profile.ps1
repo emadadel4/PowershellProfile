@@ -1,3 +1,13 @@
+
+if (-not (Get-Command choco -ErrorAction SilentlyContinue)) 
+{
+    Write-Output "Setup my powershell profile... "
+    Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
+    choco install oh-my-posh --confirm --acceptlicense -q -r --ignore-http-cache --allowemptychecksumsecure --allowemptychecksum --usepackagecodes --ignoredetectedreboot --ignore-checksums --ignore-reboot-requests
+    Write-Output "Restart the treminal "
+    return
+}
+
 & ([ScriptBlock]::Create((oh-my-posh init pwsh --config "$env:POSH_THEMES_PATH\json.omp.json" --print) -join "`n"))
 
     if (-not (Get-Module -Name Terminal-Icons -ListAvailable)) {
@@ -32,7 +42,6 @@ function emad {
         [string]$open,
         [string]$Install,
         [switch]$Help,
-        [string]$Options,
         [string]$run
 
     )
@@ -44,9 +53,9 @@ function emad {
         Write-Host "  -cd           Specifies where to navigate. Available options: 'desktop' or 'itt repo'."
         Write-Host "  -test         Check internet A ping Test"
         Write-Host "  -install      Install program's"
+        Write-Host "  -Help         Display this help message."
         Write-Host "  ch            Clear commands history"
         Write-Host "  q             Clear-Host"
-        Write-Host "  -Help         Display this help message."
         return
     }
 
@@ -61,6 +70,9 @@ function emad {
         "telegram" { 
             Start-Process ("https://t.me/emadadel4") 
         }
+        "blog" { 
+            Start-Process ("https://emadadel4.github.io/") 
+        }
         "133" { 
             Start-Process ("https://1337x.to") 
         }
@@ -69,11 +81,11 @@ function emad {
         }"yt" { 
             Start-Process ("https://youtube.com") 
         }
-        "exhdd" { 
-            Start-Process ("D:\") 
-        }
         "doc" { 
             Start-Process ("C:\Users\$env:USERNAME\Documents") 
+        }
+        "exhdd" { 
+            Start-Process ("D:\") 
         }
     }
     switch ($cd) 
@@ -86,7 +98,7 @@ function emad {
             Set-Location "C:\Users\$env:USERNAME\Documents\Github\ITT" 
         }
 
-        "website" { 
+        "blog" { 
             Set-Location "C:\Users\$env:USERNAME\Documents\Github\emadadel4.github.io" 
         }
     }
@@ -95,6 +107,7 @@ function emad {
     {
         "itt" { 
             irm bit.ly/ittea | iex 
+            Write-Host "itt..."
         }
     }
 
@@ -137,4 +150,13 @@ function ch {
     } else {
         Write-Output "ConsoleHost_history.txt not found."
     }
+}
+# Import the Chocolatey Profile that contains the necessary code to enable
+# tab-completions to function for `choco`.
+# Be aware that if you are missing these lines from your profile, tab completion
+# for `choco` will not function.
+# See https://ch0.co/tab-completion for details.
+$ChocolateyProfile = "$env:ChocolateyInstall\helpers\chocolateyProfile.psm1"
+if (Test-Path($ChocolateyProfile)) {
+  Import-Module "$ChocolateyProfile"
 }
