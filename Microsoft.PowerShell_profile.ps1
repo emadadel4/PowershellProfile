@@ -131,8 +131,8 @@ function emad {
     switch ($run) 
     {
         "itt" { 
-            irm bit.ly/ittea | iex 
             Write-Host "itt..."
+            irm bit.ly/ittea | iex 
         }
     }
 
