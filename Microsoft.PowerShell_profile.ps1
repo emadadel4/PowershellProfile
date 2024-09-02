@@ -34,6 +34,22 @@ if (-not (Get-Command choco -ErrorAction SilentlyContinue))
 
 " -ForegroundColor Yellow
 
+function IPRouter {
+
+    $defaultRoute = Get-NetRoute -DestinationPrefix "0.0.0.0/0" | Select-Object -First 1
+
+    if ($defaultRoute) {
+        $gateway = $defaultRoute.NextHop
+        ping $gateway -t
+    }
+    else
+    {
+        Write-Output "No default gateway found."
+    }
+
+    return $gateway
+}
+
 function emad {
     [CmdletBinding()]
     param (
@@ -83,6 +99,15 @@ function emad {
         }
         "doc" { 
             Start-Process ("C:\Users\$env:USERNAME\Documents") 
+        }
+        "fitgirl" { 
+            Start-Process ("https://fitgirl-repacks.site/") 
+        }
+        "router" { 
+            $T = IPRouter
+            Start-Process ("$T") 
+            Start-Process ("https://fitgirl-repacks.site/") 
+            Write-Host "opeinng.."
         }
         "exhdd" { 
             Start-Process ("D:\") 
@@ -150,13 +175,4 @@ function ch {
     } else {
         Write-Output "ConsoleHost_history.txt not found."
     }
-}
-# Import the Chocolatey Profile that contains the necessary code to enable
-# tab-completions to function for `choco`.
-# Be aware that if you are missing these lines from your profile, tab completion
-# for `choco` will not function.
-# See https://ch0.co/tab-completion for details.
-$ChocolateyProfile = "$env:ChocolateyInstall\helpers\chocolateyProfile.psm1"
-if (Test-Path($ChocolateyProfile)) {
-  Import-Module "$ChocolateyProfile"
 }
