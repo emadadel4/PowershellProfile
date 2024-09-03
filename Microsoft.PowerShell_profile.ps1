@@ -119,6 +119,9 @@ function jump {
         "blog" { 
             Set-Location "C:\Users\$env:USERNAME\Documents\Github\emadadel4.github.io" 
         }
+        "profile" { 
+            Set-Location "C:\Users\$env:USERNAME\Documents\Github\PowershellProfile" 
+        }
     }
 }
 
