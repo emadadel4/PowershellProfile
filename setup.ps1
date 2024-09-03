@@ -64,7 +64,7 @@ function DownloadProfile {
     try {
 
         Invoke-RestMethod $url -OutFile $PROFILE
-        Invoke-RestMethod $url2 -OutFile $jsonLocation
+        #Invoke-RestMethod $url2 -OutFile $jsonLocation
 
         Write-Host "The profile @ [$PROFILE] has been created"
     }
