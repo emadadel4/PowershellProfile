@@ -34,6 +34,8 @@ if (-not (Get-Command choco -ErrorAction SilentlyContinue))
 
 " -ForegroundColor Yellow
 
+
+
 function IPRouter {
 
     $defaultRoute = Get-NetRoute -DestinationPrefix "0.0.0.0/0" | Select-Object -First 1
@@ -58,7 +60,8 @@ function emad {
         [string]$open,
         [string]$Install,
         [switch]$Help,
-        [string]$run
+        [string]$run,
+        [string]$Search = $null
 
     )
 
@@ -69,12 +72,14 @@ function emad {
         Write-Host "  -cd           Specifies where to navigate. Available options: 'desktop' or 'itt repo'."
         Write-Host "  -test         Check internet A ping Test"
         Write-Host "  -install      Install program's"
-        Write-Host "  -Help         Display this help message."
+        Write-Host "  -help         Display this help message."
+        Write-Host "  -run          Execute specific commands"
+        Write-Host "  -search       Search on DuckDuckGo"
         Write-Host "  ch            Clear commands history"
         Write-Host "  q             Clear-Host"
         return
     }
-
+    
     switch ($open) 
     {
         "github" { 
@@ -158,12 +163,39 @@ function emad {
             Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1')) *> $null
         }
     }
+
+    if ($Search) {
+        if (-not $Search.Trim()) {
+            Write-Host "Please provide a search query."
+        } else {
+            # Encode the search query for use in a URL
+            $encodedQuery = [System.Web.HttpUtility]::UrlEncode($Search)
+
+            # Define the DuckDuckGo search URL with the encoded query
+            $url = "https://duckduckgo.com/?q=$encodedQuery"
+
+            # Open the search results in the default web browser
+            Start-Process $url
+        }
+    }
+    else
+    {
+        Write-Host "Please provide a search query."
+    }
 }
 
 function Q
 {
     Clear-Host
 }
+
+# kill
+function kill($name)
+{
+    Get-Process $name -ErrorAction SilentlyContinue | Stop-Process
+}
+
+
 
 function ch {
 
