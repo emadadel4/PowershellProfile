@@ -48,7 +48,7 @@ function run {
 
         }
 
-        "itt update" { 
+        "ittupdate" { 
             Write-Host "itt..."
             irm https://raw.githubusercontent.com/emadadel4/ITT/Update/itt.ps1 | iex
 
