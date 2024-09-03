@@ -178,10 +178,6 @@ function emad {
             Start-Process $url
         }
     }
-    else
-    {
-        Write-Host "Please provide a search query."
-    }
 }
 
 function Q
