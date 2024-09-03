@@ -44,7 +44,14 @@ function run {
     {
         "itt" { 
             Write-Host "itt..."
-            irm bit.ly/ittea | iex 
+            irm https://raw.githubusercontent.com/emadadel4/ITT/main/itt.ps1 | iex
+
+        }
+
+        "itt update" { 
+            Write-Host "itt..."
+            irm https://raw.githubusercontent.com/emadadel4/ITT/Update/itt.ps1 | iex
+
         }
     }
     
@@ -185,4 +192,22 @@ function ch {
     } else {
         Write-Output "ConsoleHost_history.txt not found."
     }
+}
+
+function pp {
+
+    param(
+        [string]$github = "C:\Users\$env:USERNAME\Documents\GitHub\PowershellProfile\",
+        [string]$doc = "C:\Users\$env:USERNAME\Documents\PowerShell\"
+    )
+
+    try {
+         Copy-Item -Path "$doc\*.ps1" -Destination "$github\" -Force
+         Write-Host "copied." -ForegroundColor Yellow
+    }
+    catch {
+
+        Write-Error "Failed copy Microsoft.PowerShell_profile.ps1 $_"
+    }
+
 }
