@@ -23,7 +23,7 @@ function InstallModules {
         Write-Host "Installing Modules and [GIT],[oh-my-posh]"
         Install-Module -Name Terminal-Icons -Repository PSGallery -Force -AllowClobber -SkipPublisherCheck
         choco install oh-my-posh --confirm --acceptlicense -q -r --ignore-http-cache --allowemptychecksumsecure --allowemptychecksum --usepackagecodes --ignoredetectedreboot --ignore-checksums --ignore-reboot-requests
-        choco install Git.Git --confirm --acceptlicense -q -r --ignore-http-cache --allowemptychecksumsecure --allowemptychecksum --usepackagecodes --ignoredetectedreboot --ignore-checksums --ignore-reboot-requests
+        choco install git --confirm --acceptlicense -q -r --ignore-http-cache --allowemptychecksumsecure --allowemptychecksum --usepackagecodes --ignoredetectedreboot --ignore-checksums --ignore-reboot-requests
     }
     catch {
         Write-Error "Failed to install Module or it has not exist any more: $_"
