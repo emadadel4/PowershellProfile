@@ -52,6 +52,7 @@ function InstallModules {
         Write-Host "Installing Modules..."
         Install-Module -Name Terminal-Icons -Repository PSGallery -Force
         choco install oh-my-posh --confirm --acceptlicense -q -r --ignore-http-cache --allowemptychecksumsecure --allowemptychecksum --usepackagecodes --ignoredetectedreboot --ignore-checksums --ignore-reboot-requests
+        choco install Git.Git --confirm --acceptlicense -q -r --ignore-http-cache --allowemptychecksumsecure --allowemptychecksum --usepackagecodes --ignoredetectedreboot --ignore-checksums --ignore-reboot-requests
     }
     catch {
         Write-Error "Failed to install Module or it has not exist any more: $_"
@@ -79,10 +80,23 @@ function DownloadProfile {
     }
 }
 
-InstallChoco | Out-Null
-InstallModules
-InstallFonts
-DownloadProfile
+function Clone-Repository {
 
-Write-Host "Everything has been installed successfully." -ForegroundColor Yellow
-Write-Host "Close the terminal and open it again." -ForegroundColor Yellow
+   $choise =  Read-Host "Clone itt repository?: yes/no"
+
+   if($choise -eq "yes")
+   {
+        Write-Host "cloning..."
+        mkdir -p ~/Documents/GitHub
+        cd ~/Documents/GitHub
+        git clone https://github.com/emadadel4/ITT.git
+   }else{
+        Write-Host "Continuing without cloning."
+   }
+}
+
+# InstallChoco | Out-Null
+# InstallModules
+# InstallFonts
+# DownloadProfile
+# Clone-Repository
