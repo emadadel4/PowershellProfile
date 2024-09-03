@@ -16,6 +16,20 @@ function InstallChoco {
     }
 }
 
+function InstallModules {
+
+    try {
+
+        Write-Host "Installing Modules..."
+        Install-Module -Name Terminal-Icons -Repository PSGallery -Force
+        choco install oh-my-posh --confirm --acceptlicense -q -r --ignore-http-cache --allowemptychecksumsecure --allowemptychecksum --usepackagecodes --ignoredetectedreboot --ignore-checksums --ignore-reboot-requests
+        choco install Git.Git --confirm --acceptlicense -q -r --ignore-http-cache --allowemptychecksumsecure --allowemptychecksum --usepackagecodes --ignoredetectedreboot --ignore-checksums --ignore-reboot-requests
+    }
+    catch {
+        Write-Error "Failed to install Module or it has not exist any more: $_"
+    }
+}
+
 function InstallFonts {
 
    param(
@@ -43,20 +57,6 @@ function InstallFonts {
         Write-Error "Failed to download or install $_"
    }
    
-}
-
-function InstallModules {
-
-    try {
-
-        Write-Host "Installing Modules..."
-        Install-Module -Name Terminal-Icons -Repository PSGallery -Force
-        choco install oh-my-posh --confirm --acceptlicense -q -r --ignore-http-cache --allowemptychecksumsecure --allowemptychecksum --usepackagecodes --ignoredetectedreboot --ignore-checksums --ignore-reboot-requests
-        choco install Git.Git --confirm --acceptlicense -q -r --ignore-http-cache --allowemptychecksumsecure --allowemptychecksum --usepackagecodes --ignoredetectedreboot --ignore-checksums --ignore-reboot-requests
-    }
-    catch {
-        Write-Error "Failed to install Module or it has not exist any more: $_"
-    }
 }
 
 function DownloadProfile {
@@ -95,8 +95,8 @@ function Clone-Repository {
    }
 }
 
-# InstallChoco | Out-Null
-# InstallModules
-# InstallFonts
-# DownloadProfile
-# Clone-Repository
+InstallChoco | Out-Null
+InstallModules
+InstallFonts
+DownloadProfile
+Clone-Repository
