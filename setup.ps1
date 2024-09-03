@@ -51,7 +51,7 @@ function InstallModules {
 
         Write-Host "Installing Modules..."
         Install-Module -Name Terminal-Icons -Repository PSGallery -Force
-        choco install oh-my-posh --confirm --acceptlicense -q -r --ignore-http-cache --allowemptychecksumsecure --allowemptychecksum --usepackagecodes --ignoredetectedreboot --ignore-checksums --ignore-reboot-requests
+        choco install oh-my-posh --confirm --acceptlicense -q -r --ignore-http-cache --allowemptychecksumsecure --allowemptychecksum --usepackagecodes --ignoredetectedreboot --ignore-checksums --ignore-reboot-requests | Out-Null
     }
     catch {
         Write-Error "Failed to install Module or it has not exist any more: $_"
