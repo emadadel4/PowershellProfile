@@ -32,6 +32,8 @@ if (-not (Get-Command choco -ErrorAction SilentlyContinue))
     | |___| |  | |/ ___ \| |_| |  
     |_____|_|  |_/_/   \_\____/  
 
+    01000101 01001101 01000001 01000100
+
 " -ForegroundColor Yellow
 
 function run {
