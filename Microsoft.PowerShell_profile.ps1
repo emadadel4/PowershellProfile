@@ -111,11 +111,9 @@ function jump {
         "desktop" { 
             Set-Location "C:\Users\$env:USERNAME\Desktop"
         }
-
         "itt" { 
             Set-Location "C:\Users\$env:USERNAME\Documents\Github\ITT" 
         }
-
         "blog" { 
             Set-Location "C:\Users\$env:USERNAME\Documents\Github\emadadel4.github.io" 
         }
