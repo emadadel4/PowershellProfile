@@ -21,7 +21,7 @@ function InstallModules {
     try {
 
         Write-Host "Installing Modules and [GIT],[oh-my-posh]"
-        Install-Module -Name Terminal-Icons -Repository PSGallery -Force
+        Install-Module -Name Terminal-Icons -Repository PSGallery -Force -AllowClobber -SkipPublisherCheck
         choco install oh-my-posh --confirm --acceptlicense -q -r --ignore-http-cache --allowemptychecksumsecure --allowemptychecksum --usepackagecodes --ignoredetectedreboot --ignore-checksums --ignore-reboot-requests
         choco install Git.Git --confirm --acceptlicense -q -r --ignore-http-cache --allowemptychecksumsecure --allowemptychecksum --usepackagecodes --ignoredetectedreboot --ignore-checksums --ignore-reboot-requests
     }
