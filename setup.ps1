@@ -8,6 +8,7 @@ Add-Type -AssemblyName System.Drawing
 function InstallChoco {
     
     try {
+        Write-Host "Installing Choco..."
         Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1')) *> $null
     }
     catch {
@@ -24,6 +25,8 @@ function InstallFonts {
    )
 
    try {
+
+        Write-Host "Installing fonts..."
 
         Invoke-WebRequest -Uri $fontUrl -OutFile $extractPath
         Expand-Archive -Path $zipFilePath -DestinationPath $extractPath -Force
@@ -45,6 +48,8 @@ function InstallFonts {
 function InstallModules {
 
     try {
+
+        Write-Host "Installing Modules..."
         Install-Module -Name Terminal-Icons -Repository PSGallery -Force
         choco install oh-my-posh --confirm --acceptlicense -q -r --ignore-http-cache --allowemptychecksumsecure --allowemptychecksum --usepackagecodes --ignoredetectedreboot --ignore-checksums --ignore-reboot-requests
     }
@@ -64,9 +69,9 @@ function DownloadProfile {
 
     try {
 
+        Write-Host "Setup powershell profile..."
         Invoke-RestMethod $url -OutFile $PROFILE
         Invoke-RestMethod $url2 -OutFile $jsonLocation
-
         Write-Host "The profile profile has been created" -ForegroundColor Yellow
     }
     catch {
@@ -78,3 +83,5 @@ InstallChoco
 InstallModules
 InstallFonts
 DownloadProfile
+
+Write-Host "Everything has been installed successfully"
