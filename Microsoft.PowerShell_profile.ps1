@@ -111,6 +111,9 @@ function emad {
         "exhdd" { 
             Start-Process ("D:\") 
         }
+        "gmail"{
+            Start-Process ("https://mail.google.com/mail/u/0/") 
+        }
     }
     switch ($cd) 
     {
