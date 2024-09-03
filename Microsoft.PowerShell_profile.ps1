@@ -35,23 +35,6 @@ if (-not (Get-Command choco -ErrorAction SilentlyContinue))
 " -ForegroundColor Yellow
 
 
-
-function IPRouter {
-
-    $defaultRoute = Get-NetRoute -DestinationPrefix "0.0.0.0/0" | Select-Object -First 1
-
-    if ($defaultRoute) {
-        $gateway = $defaultRoute.NextHop
-        ping $gateway -t
-    }
-    else
-    {
-        Write-Output "No default gateway found."
-    }
-
-    return $gateway
-}
-
 function emad {
     [CmdletBinding()]
     param (
@@ -187,8 +170,6 @@ function kill($name)
 {
     Get-Process $name -ErrorAction SilentlyContinue | Stop-Process
 }
-
-
 
 function ch {
 
