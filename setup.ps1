@@ -84,4 +84,5 @@ InstallModules
 InstallFonts
 DownloadProfile
 
-Write-Host "Everything has been installed successfully" -ForegroundColor Yellow
+Write-Host "Everything has been installed successfully." -ForegroundColor Yellow
+Write-Host "Close the terminal and open it again." -ForegroundColor Yellow

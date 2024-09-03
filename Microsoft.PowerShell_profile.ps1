@@ -34,34 +34,27 @@ if (-not (Get-Command choco -ErrorAction SilentlyContinue))
 
 " -ForegroundColor Yellow
 
-
-function emad {
+function run {
     [CmdletBinding()]
     param (
-        [string]$cd,
-        [string]$Test,
-        [string]$open,
-        [string]$Install,
-        [switch]$Help,
-        [string]$run,
-        [string]$Search = $null
-
+        [string]$run
     )
 
-    if ($Help) {
-        Write-Host "usage: emad  [<command>] [<options>]  `n` "
-        Write-Host "The following commands are available:"
-        Write-Host "  -open         Specifies where to navigate. Available options: 'github' or 'itt' or 'telegram' 'exhdd'"
-        Write-Host "  -cd           Specifies where to navigate. Available options: 'desktop' or 'itt repo'."
-        Write-Host "  -test         Check internet A ping Test"
-        Write-Host "  -install      Install program's"
-        Write-Host "  -help         Display this help message."
-        Write-Host "  -run          Execute specific commands"
-        Write-Host "  -search       Search on DuckDuckGo"
-        Write-Host "  ch            Clear commands history"
-        Write-Host "  q             Clear-Host"
-        return
+    switch ($run) 
+    {
+        "itt" { 
+            Write-Host "itt..."
+            irm bit.ly/ittea | iex 
+        }
     }
+    
+}
+
+function open {
+    [CmdletBinding()]
+    param (
+        [string]$open
+    )
     
     switch ($open) 
     {
@@ -98,7 +91,15 @@ function emad {
             Start-Process ("https://mail.google.com/mail/u/0/") 
         }
     }
-    switch ($cd) 
+}
+
+function jump {
+    [CmdletBinding()]
+    param (
+        [string]$jump   
+    )
+
+    switch ($jump) 
     {
         "desktop" { 
             Set-Location "C:\Users\$env:USERNAME\Desktop"
@@ -112,30 +113,13 @@ function emad {
             Set-Location "C:\Users\$env:USERNAME\Documents\Github\emadadel4.github.io" 
         }
     }
+}
 
-    switch ($run) 
-    {
-        "itt" { 
-            Write-Host "itt..."
-            irm bit.ly/ittea | iex 
-        }
-    }
+function install {
 
-    switch ($Test) 
-    {
-        "ping" { 
-            $defaultRoute = Get-NetRoute -DestinationPrefix "0.0.0.0/0" | Select-Object -First 1
-
-            if ($defaultRoute) {
-                $gateway = $defaultRoute.NextHop
-                ping $gateway -t
-            }
-            else
-            {
-                Write-Output "No default gateway found."
-            }
-        }
-    }
+    param(
+        [string]$Install
+    )
 
     switch ($Install) 
     {
@@ -143,7 +127,15 @@ function emad {
             Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1')) *> $null
         }
     }
+    
+}
 
+function search {
+    [CmdletBinding()]
+    param (
+        [string]$Search = $null
+    )
+    
     if ($Search) {
         if (-not $Search.Trim()) {
             Write-Host "Please provide a search query."
@@ -160,14 +152,26 @@ function emad {
     }
 }
 
-function Q
-{
+function help {
+
+    Write-Host "usage: [<command>] [<options>]  `n` "
+    Write-Host "The following commands are available:"
+    Write-Host "  open         Specifies where to navigate. Available options: 'github' or 'itt' or 'telegram' 'exhdd'"
+    Write-Host "  jump         Specifies where to navigate. Available options: 'desktop' or 'itt repo'."
+    Write-Host "  install      Install program's"
+    Write-Host "  help         Display this help message."
+    Write-Host "  run          Execute specific commands"
+    Write-Host "  search       Search on DuckDuckGo"
+    Write-Host "  kill         end program"
+    Write-Host "  ch           Clear commands history"
+    Write-Host "  q            Clear-Host"
+}
+
+function Q{
     Clear-Host
 }
 
-# kill
-function kill($name)
-{
+function kill($name){
     Get-Process $name -ErrorAction SilentlyContinue | Stop-Process
 }
 
