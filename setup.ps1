@@ -55,7 +55,7 @@ function InstallModules {
 function DownloadProfile {
 
     param (
-        [string]$url = "https://raw.githubusercontent.com/emadadel4/PowershellProfile/main/Microsoft.PowerShell_profile.ps1?token=GHSAT0AAAAAACW4NFVZXRKNVW3OR3QRTHKSZWWTQ3A"
+        [string]$url = "https://raw.githubusercontent.com/emadadel4/PowershellProfile/main/Microsoft.PowerShell_profile.ps1"
         [string]$url2 = "https://raw.githubusercontent.com/emadadel4/PowershellProfile/main/settings.json",
         [string]$jsonLocation = "C:\Users\Emad Adel\AppData\Local\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState"
     )
