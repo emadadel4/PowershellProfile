@@ -73,4 +73,7 @@ function DownloadProfile {
     }
 }
 
+InstallChoco
+InstallModules
+InstallFonts
 DownloadProfile
