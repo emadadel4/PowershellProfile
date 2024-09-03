@@ -108,12 +108,6 @@ function emad {
         "fitgirl" { 
             Start-Process ("https://fitgirl-repacks.site/") 
         }
-        "router" { 
-            $T = IPRouter
-            Start-Process ("$T") 
-            Start-Process ("https://fitgirl-repacks.site/") 
-            Write-Host "opeinng.."
-        }
         "exhdd" { 
             Start-Process ("D:\") 
         }
