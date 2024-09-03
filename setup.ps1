@@ -84,4 +84,4 @@ InstallModules
 InstallFonts
 DownloadProfile
 
-Write-Host "Everything has been installed successfully"
+Write-Host "Everything has been installed successfully" -ForegroundColor Yellow
