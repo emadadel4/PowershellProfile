@@ -97,7 +97,7 @@ function Clone-Repository {
 
 function Update-Powershell {
 
-    $choise =  Read-Host "Update Powershell to 7?"
+    $choise =  Read-Host "Update Powershell to 7: y/n"
  
     if($choise -eq "y")
     {
