@@ -82,9 +82,9 @@ function Download-Profile {
 
 function Clone-Repository {
 
-   $choise =  Read-Host "Clone itt repository?: yes/no"
+   $choise =  Read-Host "Clone itt repository?: y/n"
 
-   if($choise -eq "yes")
+   if($choise -eq "y")
    {
         Write-Host "cloning..."
         mkdir -p ~/Documents/GitHub
@@ -99,12 +99,12 @@ function Update-Powershell {
 
     $choise =  Read-Host "Update Powershell to 7?"
  
-    if($choise -eq "yes")
+    if($choise -eq "y")
     {
         Write-Host "Updating..."
         iex "& { $(irm https://aka.ms/install-powershell.ps1) } -UseMSI"
     }else{
-         Write-Host "Continuing without update."
+         Write-Host "Continue without update."
     }
  }
 
