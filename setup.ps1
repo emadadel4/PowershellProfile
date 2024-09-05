@@ -5,7 +5,7 @@ if (-NOT ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdenti
 
 Add-Type -AssemblyName System.Drawing
 
-function InstallChoco {
+function Install-Choco {
     
     try {
         Write-Host "Installing Choco..."
@@ -16,7 +16,7 @@ function InstallChoco {
     }
 }
 
-function InstallModules {
+function Install-Modules {
 
     try {
 
@@ -30,7 +30,7 @@ function InstallModules {
     }
 }
 
-function InstallFonts {
+function Install-Fonts {
 
    param(
     [string]$fontUrl = "https://github.com/emadadel4/PowershellProfile/raw/main/fonts.zip",
@@ -59,7 +59,7 @@ function InstallFonts {
    
 }
 
-function DownloadProfile {
+function Download-Profile {
 
     param (
         [string]$url = "https://raw.githubusercontent.com/emadadel4/PowershellProfile/main/Microsoft.PowerShell_profile.ps1",
@@ -95,9 +95,23 @@ function Clone-Repository {
    }
 }
 
-InstallChoco | Out-Null
-InstallModules
-InstallFonts
-DownloadProfile
+function Update-Powershell {
+
+    $choise =  Read-Host "Update Powershell to 7?"
+ 
+    if($choise -eq "yes")
+    {
+        Write-Host "Updating..."
+        iex "& { $(irm https://aka.ms/install-powershell.ps1) } -UseMSI"
+    }else{
+         Write-Host "Continuing without cloning."
+    }
+ }
+
+Install-Choco | Out-Null
+Update-Powershell
+Install-Modules
+Install-Fonts
+Download-Profile
 Clone-Repository
 Start-Process "https://github.com/emadadel4"
