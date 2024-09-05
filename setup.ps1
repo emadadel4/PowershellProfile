@@ -104,7 +104,7 @@ function Update-Powershell {
         Write-Host "Updating..."
         iex "& { $(irm https://aka.ms/install-powershell.ps1) } -UseMSI"
     }else{
-         Write-Host "Continuing without cloning."
+         Write-Host "Continuing without update."
     }
  }
 
