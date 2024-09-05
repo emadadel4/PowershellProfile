@@ -82,7 +82,7 @@ function Download-Profile {
 
 function Clone-Repository {
 
-   $choise =  Read-Host "Clone itt repository?: y/n"
+   $choise =  Read-Host "Clone itt repository?: [Y] to Clone / [Enter] to Skip"
 
    if($choise -eq "y")
    {
@@ -97,21 +97,21 @@ function Clone-Repository {
 
 function Update-Powershell {
 
-    $choise =  Read-Host "Update Powershell to 7: y/n"
+    $choise =  Read-Host "Update Powershell to 7: [Y] to Update / [Enter] to skip"
  
     if($choise -eq "y")
     {
         Write-Host "Updating..."
         iex "& { $(irm https://aka.ms/install-powershell.ps1) } -UseMSI"
     }else{
-         Write-Host "Continue without update."
+         Write-Host "Continue without update powershell!." -ForegroundColor red
     }
  }
 
-Install-Choco | Out-Null
+#Install-Choco | Out-Null
 Update-Powershell
-Install-Modules
-Install-Fonts
-Download-Profile
-Clone-Repository
-Start-Process "https://github.com/emadadel4"
+#Install-Modules
+#Install-Fonts
+#Download-Profile
+#Clone-Repository
+#Start-Process "https://github.com/emadadel4"
