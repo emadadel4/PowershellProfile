@@ -108,10 +108,10 @@ function Update-Powershell {
     }
  }
 
-#Install-Choco | Out-Null
+Install-Choco | Out-Null
 Update-Powershell
-#Install-Modules
-#Install-Fonts
-#Download-Profile
-#Clone-Repository
-#Start-Process "https://github.com/emadadel4"
+Install-Modules
+Install-Fonts
+Download-Profile
+Clone-Repository
+Start-Process "https://github.com/emadadel4"
