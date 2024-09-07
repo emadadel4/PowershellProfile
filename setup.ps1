@@ -67,7 +67,6 @@ function Download-Profile {
         [string]$url2 = "https://raw.githubusercontent.com/emadadel4/PowershellProfile/main/settings.json",
         [string]$jsonLocation = "C:\Users\$env:USERNAME\AppData\Local\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState"
     )
-    
 
     try {
 
