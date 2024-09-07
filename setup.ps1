@@ -82,31 +82,29 @@ function Download-Profile {
 
 function Clone-Repository {
 
-   $choise =  Read-Host "Clone itt repository?: [Y] to Clone / [Enter] to Skip"
+    $path = "C:\Users\$env:USERNAME\Documents\GitHub\itt"
+    $choise =  Read-Host "Clone itt repository?: [Y] to Clone / [Enter] to Skip"
 
-   if($choise -eq "y")
-   {
+   if($choise -eq ""){return}
+
+   if (-not (Test-Path -Path $path)) {
         Write-Host "cloning..."
-        mkdir -p ~/Documents/GitHub
-        cd ~/Documents/GitHub
+        mkdir -p ~/Documents/GitHub 
+        Set-Location ~/Documents/GitHub
         git clone https://github.com/emadadel4/ITT.git
-   }else{
-        Write-Host "Continuing without cloning."
+   }
+   else{
+    Write-Host "GitHub folder already exists."
    }
 }
 
 function Update-Powershell {
 
     $choise =  Read-Host "Update Powershell to 7: [Y] to Update / [Enter] to skip"
- 
-    if($choise -eq "y")
-    {
-        Write-Host "Updating..."
-        iex "& { $(irm https://aka.ms/install-powershell.ps1) } -UseMSI"
-    }else{
-         Write-Host "Continue without update powershell!." -ForegroundColor red
-    }
- }
+    if($choise -eq "") { return }
+    Write-Host "Updating..."
+    iex "& { $(irm https://aka.ms/install-powershell.ps1) } -UseMSI"
+}    
 
 Install-Choco | Out-Null
 Update-Powershell
