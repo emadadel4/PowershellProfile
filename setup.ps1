@@ -34,15 +34,15 @@ function Install-Fonts {
 
    param(
     [string]$fontUrl = "https://github.com/emadadel4/PowershellProfile/raw/main/fonts.zip",
-    [string]$zipFilePath = "$env:TEMP\test.zip",
-    [string]$extractPath = "$env:TEMP\fonts"
+    [string]$zipFilePath = "$env:TEMP\fonts.zip",
+    [string]$extractPath = "$env:TEMP\myfont"
    )
 
    try {
 
         Write-Host "Installing fonts..."
 
-        Invoke-WebRequest -Uri $fontUrl -OutFile $extractPath
+        Invoke-WebRequest -Uri $fontUrl -OutFile "$env:TEMP\fonts.zip"
         Expand-Archive -Path $zipFilePath -DestinationPath $extractPath -Force
         $destination = (New-Object -ComObject Shell.Application).Namespace(0x14)
         $fontFamilies = (New-Object System.Drawing.Text.InstalledFontCollection).Families.Name
@@ -51,12 +51,13 @@ function Install-Fonts {
                 $destination.CopyHere($_.FullName, 0x10)
             }
         }
+        Remove-Item -Path "$env:TEMP\myfont" -Recurse -Force
+        Remove-Item -Path "$env:TEMP\fonts.zip" -Recurse -Force
    }
    catch
    {
-        Write-Error "Failed to download or install $_"
+        Write-Error "Failed to extract or install $_"
    }
-   
 }
 
 function Download-Profile {
