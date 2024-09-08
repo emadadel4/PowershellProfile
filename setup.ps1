@@ -103,10 +103,39 @@ function Update-Powershell {
     if($choise -eq "") { return }
     Write-Host "Updating..."
     iex "& { $(irm https://aka.ms/install-powershell.ps1) } -UseMSI"
-}    
+}  
+
+function CheckPSV {
+   
+    # Get the current PowerShell version
+    $currentVersion = $PSVersionTable.PSVersion
+
+    # GitHub API URL for fetching the latest PowerShell release
+    $githubUrl = "https://api.github.com/repos/PowerShell/PowerShell/releases/latest"
+
+    # Get the latest release information from GitHub
+    $response = Invoke-RestMethod -Uri $githubUrl
+
+    # Extract the latest version from the GitHub response (e.g., 'v7.3.4')
+    $latestVersion = $response.tag_name.TrimStart('v')
+
+    # Convert both versions to System.Version for comparison
+    $current = [Version]$currentVersion
+    $latest = [Version]$latestVersion
+
+    # Compare the current version with the latest version
+    if ($latest -gt $current) {
+        Write-Host "A new version of PowerShell is available: $latest"
+        Update-Powershell
+    } 
+    else
+    {
+        Write-Host "You are using the latest version of PowerShell: $current"
+    }
+}
 
 Install-Choco | Out-Null
-Update-Powershell
+CheckPSV
 Install-Modules
 Install-Fonts
 Download-Profile
