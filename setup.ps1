@@ -140,4 +140,5 @@ Install-Modules
 Install-Fonts
 Download-Profile
 Clone-Repository
-Start-Process "https://github.com/emadadel4"
+Clear-Host
+& $profile
