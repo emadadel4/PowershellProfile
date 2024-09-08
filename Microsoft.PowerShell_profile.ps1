@@ -36,6 +36,23 @@ if (-not (Get-Command choco -ErrorAction SilentlyContinue))
 
 " -ForegroundColor Yellow
 
+# Show help
+function help {
+
+    Write-Host "usage: [<command>] [<options>]  `n` "
+    Write-Host "The following commands are available:"
+    Write-Host "  open         Specifies where to navigate. Available options: 'github' or 'itt' or 'telegram' 'exhdd'"
+    Write-Host "  jump         Specifies where to navigate. Available options: 'desktop' or 'itt repo'."
+    Write-Host "  install      Install program's"
+    Write-Host "  help         Display this help message."
+    Write-Host "  run          Execute specific commands"
+    Write-Host "  search       Search on DuckDuckGo"
+    Write-Host "  kill         end program"
+    Write-Host "  ch           Clear commands history"
+    Write-Host "  q            Clear-Host"
+}
+
+# Excute powershell command
 function run {
     [CmdletBinding()]
     param (
@@ -59,6 +76,7 @@ function run {
     
 }
 
+# open folder or url etc..
 function open {
     [CmdletBinding()]
     param (
@@ -102,6 +120,7 @@ function open {
     }
 }
 
+# jump to folder
 function jump {
     [CmdletBinding()]
     param (
@@ -125,6 +144,7 @@ function jump {
     }
 }
 
+# install choco
 function install {
 
     param(
@@ -140,6 +160,7 @@ function install {
     
 }
 
+# search based on duckduck go engine
 function search {
     [CmdletBinding()]
     param (
@@ -162,29 +183,17 @@ function search {
     }
 }
 
-function help {
-
-    Write-Host "usage: [<command>] [<options>]  `n` "
-    Write-Host "The following commands are available:"
-    Write-Host "  open         Specifies where to navigate. Available options: 'github' or 'itt' or 'telegram' 'exhdd'"
-    Write-Host "  jump         Specifies where to navigate. Available options: 'desktop' or 'itt repo'."
-    Write-Host "  install      Install program's"
-    Write-Host "  help         Display this help message."
-    Write-Host "  run          Execute specific commands"
-    Write-Host "  search       Search on DuckDuckGo"
-    Write-Host "  kill         end program"
-    Write-Host "  ch           Clear commands history"
-    Write-Host "  q            Clear-Host"
-}
-
+# Clear Host
 function Q{
     Clear-Host
 }
 
+# kill Process
 function kill($name){
     Get-Process $name -ErrorAction SilentlyContinue | Stop-Process
 }
 
+# Clear history commands
 function ch {
 
     $historyFilePath = "$env:USERPROFILE\AppData\Roaming\Microsoft\Windows\PowerShell\PSReadLine\ConsoleHost_history.txt"
@@ -197,6 +206,7 @@ function ch {
     }
 }
 
+# Copy powrshell profile to github repo folder
 function pp {
 
     param(
@@ -214,3 +224,21 @@ function pp {
     }
 
 }
+
+# Get hidden files in folders
+function lh {Get-ChildItem -Path . -Force -Hidden | Format-Table -AutoSize }
+
+# open file with notepad.
+function np {
+    param($name)
+    notepad.exe $name
+}
+
+# make a new file
+function touch {
+    param (
+        $name
+    )
+    New-Item -ItemType "file" -Path . -Name $name
+}
+
