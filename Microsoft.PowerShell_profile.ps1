@@ -186,6 +186,7 @@ function search {
 # Clear Host
 function Q{
     Clear-Host
+    & $profile
 }
 
 # kill Process
