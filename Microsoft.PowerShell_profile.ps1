@@ -242,3 +242,5 @@ function touch {
     New-Item -ItemType "file" -Path . -Name $name
 }
 
+# System Information
+function sysinfo { Get-ComputerInfo }
