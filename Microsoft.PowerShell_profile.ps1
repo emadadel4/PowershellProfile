@@ -82,11 +82,12 @@ function help {
     Write-Host "The following commands are available:"
     Write-Host "  open         Specifies where to navigate. Available options: 'github' or 'itt' or 'telegram' 'exhdd'"
     Write-Host "  jump         Specifies where to navigate. Available options: 'desktop' or 'itt repo'."
-    Write-Host "  install      Install program's"
+    Write-Host "  install      Install program's using choco"
     Write-Host "  help         Display this help message."
     Write-Host "  run          Execute specific commands"
     Write-Host "  search       Search on DuckDuckGo"
     Write-Host "  kill         end program"
+    Write-Host "  dark         Toggle dark mode"
     Write-Host "  ch           Clear commands history"
     Write-Host "  q            Clear-Host"
 }
@@ -305,8 +306,6 @@ function touch {
     }
 }
 
-
-
 # Enable & Disable Dark mode
 function Dark {
     param (
@@ -343,7 +342,6 @@ function Dark {
         Write-Host "Error: $($_.Exception.Message)"
     }
 }
-
 
 # System Information
 function sysinfo { Get-ComputerInfo }
