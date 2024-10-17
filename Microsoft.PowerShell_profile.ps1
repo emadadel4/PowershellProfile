@@ -262,7 +262,7 @@ function ch {
 }
 
 # Copy powrshell profile to github repo folder
-function pp {
+function cc {
 
     param(
         [string]$github = "C:\Users\$env:USERNAME\Documents\GitHub\PowershellProfile\",
