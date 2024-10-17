@@ -57,7 +57,7 @@ function Add-Log {
     }
 
     switch ($Level.ToUpper()) {
-        "INFO" { $icon = "!" }
+        "INFO" { $icon = "+" }
         "WARNING" { $icon = "!" }
         "ERROR" { $icon = "X" }
         "Installed" { $icon = "√" }
@@ -71,7 +71,7 @@ function Add-Log {
     $logMessage =  "[$icon] $Message"
 
     # Write the log message to the console with the specified color
-    Write-Host " $logMessage" -ForegroundColor $color
+    Write-Host "$logMessage" -ForegroundColor $color
 
 }
 
@@ -256,7 +256,7 @@ function pp {
 
     try {
          Copy-Item -Path "$doc\*.ps1" -Destination "$github\" -Force
-         Write-Host "copied." -ForegroundColor Yellow
+         Add-Log -Message "Copied" -Level "INFO"
     }
     catch {
 
@@ -277,10 +277,20 @@ function np {
 # make a new file
 function touch {
     param (
-        $name
+        [string]$name
     )
-    New-Item -ItemType "file" -Path . -Name $name
+
+    try {
+        # Attempt to create the file
+        New-Item -ItemType "file" -Path . -Name $name -ErrorAction Stop
+        Add-Log -Message "File '$name' created successfully." -Level "INFO"
+    }
+    catch {
+        # Handle any errors that occur
+        Write-Host "Failed to create file '$name'. Error: $_" -ForegroundColor Red
+    }
 }
+
 
 
 # Enable & Disable Dark mode
