@@ -101,14 +101,14 @@ function run {
     switch ($run) 
     {
         "itt" { 
-            Write-Host "itt..."
+            Write-Host "ITT Relasse..."
             irm https://raw.githubusercontent.com/emadadel4/ITT/main/itt.ps1 | iex
 
         }
 
         "ittupdate" { 
-            Write-Host "itt..."
-            irm https://raw.githubusercontent.com/emadadel4/ITT/Update/itt.ps1 | iex
+            Write-Host "ITT Debug..."
+            irm https://raw.githubusercontent.com/emadadel4/ITT/update/itt.ps1 | iex
 
         }
     }
@@ -229,9 +229,23 @@ function Q{
 }
 
 # kill Process
-function kill($name){
-    Get-Process $name -ErrorAction SilentlyContinue | Stop-Process
+function kill {
+    param (
+        [string]$name
+    )
+
+    try {
+        # Attempt to get and stop the process
+        $process = Get-Process -Name $name -ErrorAction Stop
+        Stop-Process -InputObject $process -ErrorAction Stop
+        Add-Log -Message "Process '$name' stopped successfully." -Level "INFO"
+    }
+    catch {
+        # Handle any errors that occur
+        Add-Log -Message "Failed to create file '$name'. Error: $_" -Level "ERROR"
+    }
 }
+
 
 # Clear history commands
 function ch {
