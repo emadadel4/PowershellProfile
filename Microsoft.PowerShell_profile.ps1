@@ -243,5 +243,44 @@ function touch {
     New-Item -ItemType "file" -Path . -Name $name
 }
 
+
+# Enable & Disable Dark mode
+function Dark {
+    param (
+        $app = "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize",
+        $system = "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize"
+    )
+
+    try {
+        # Check if the registry keys exist
+        if (!(Test-Path $app) -or !(Test-Path $system)) {
+            Write-Host "Error: Registry paths not found."
+            return
+        }
+
+        # Get current theme settings for both App and System
+        $currentAppTheme = Get-ItemProperty -Path $app -Name AppsUseLightTheme -ErrorAction Stop
+        $currentSystemTheme = Get-ItemProperty -Path $system -Name SystemUsesLightTheme -ErrorAction Stop
+
+        # Toggle the values
+        if ($currentAppTheme.AppsUseLightTheme -eq 1 -and $currentSystemTheme.SystemUsesLightTheme -eq 1) {
+            # Switch to dark mode
+            Set-ItemProperty -Path $app -Name AppsUseLightTheme -Value 0
+            Set-ItemProperty -Path $system -Name SystemUsesLightTheme -Value 0
+            Write-Host "Switched to Dark Mode."
+        }
+        else {
+            # Switch to light mode
+            Set-ItemProperty -Path $app -Name AppsUseLightTheme -Value 1
+            Set-ItemProperty -Path $system -Name SystemUsesLightTheme -Value 1
+            Write-Host "Switched to Light Mode."
+        }
+    }
+    catch {
+        Write-Host "Error: $($_.Exception.Message)"
+    }
+}
+
+
 # System Information
 function sysinfo { Get-ComputerInfo }
