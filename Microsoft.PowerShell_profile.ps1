@@ -189,9 +189,6 @@ function open {
         "blog" { 
             Start-Process ("https://emadadel4.github.io/") 
         }
-        "133" { 
-            Start-Process ("https://1337x.to") 
-        }
         "fast" { 
             Start-Process ("https://fast.com") 
         }"yt" { 
@@ -199,9 +196,6 @@ function open {
         }
         "doc" { 
             Start-Process ("C:\Users\$env:USERNAME\Documents") 
-        }
-        "fitgirl" { 
-            Start-Process ("https://fitgirl-repacks.site/") 
         }
         "exhdd" { 
             Start-Process ("D:\") 
