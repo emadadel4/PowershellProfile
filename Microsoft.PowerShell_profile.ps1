@@ -75,6 +75,58 @@ function Add-Log {
 
 }
 
+function 13x {
+   
+    [CmdletBinding()]
+    param (
+        [string]$Search = $null
+    )
+    
+    if ($Search) {
+        if (-not $Search.Trim()) {
+            Write-Host "Please provide a search query."
+        } else {
+            # Encode the search query for use in a URL
+            $encodedQuery = [System.Web.HttpUtility]::UrlEncode($Search)
+
+            # Define the DuckDuckGo search URL with the encoded query
+            $url = "https://www.1337x.to/search/$encodedQuery/1/"
+
+            # Open the search results in the default web browser
+            Start-Process $url
+        }
+    }else {
+        Write-Host "usage: [<13x>] [<search query>]  `n` "
+    }
+
+}
+
+function fitgirl {
+   
+    [CmdletBinding()]
+    param (
+        [string]$Search = $null
+    )
+    
+    if ($Search) {
+        if (-not $Search.Trim()) {
+            Write-Host "Please provide a search query."
+        } else {
+            # Encode the search query for use in a URL
+            $encodedQuery = [System.Web.HttpUtility]::UrlEncode($Search)
+
+            # Define the DuckDuckGo search URL with the encoded query
+            $url = "https://fitgirl-repacks.site/?s=$encodedQuery"
+
+            # Open the search results in the default web browser
+            Start-Process $url
+        }
+    }else {
+        Write-Host "usage: [<fitgirl>] [<search query>]  `n` "
+    }
+
+}
+
 # Show help
 function help {
 
