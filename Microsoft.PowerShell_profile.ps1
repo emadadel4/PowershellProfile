@@ -152,6 +152,31 @@ function yt {
     }
 }
 
+function gog {
+   
+    [CmdletBinding()]
+    param (
+        [string]$Search = $null
+    )
+    
+    if ($Search) {
+        if (-not $Search.Trim()) {
+            Write-Host "Please provide a search query."
+        } else {
+            # Encode the search query for use in a URL
+            $encodedQuery = [System.Web.HttpUtility]::UrlEncode($Search)
+
+            # Define the DuckDuckGo search URL with the encoded query
+            $url = "https://www.google.com/search?q=$encodedQuery"
+
+            # Open the search results in the default web browser
+            Start-Process $url
+        }
+    }else {
+        Write-Host "usage: [<gog>] [<search query>]  `n` "
+    }
+}
+
 # Show help
 function help {
 
