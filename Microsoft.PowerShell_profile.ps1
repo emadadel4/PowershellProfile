@@ -199,6 +199,15 @@ function help {
     Write-Host "  q            Clear-Host"
 }
 
+function itt {
+    param (
+        [string]$url = "https://raw.githubusercontent.com/emadadel4/itt/main/itt.ps1"
+    )
+
+    Add-Log -Message "Launch itt..." -Level "info"
+    Invoke-RestMethod $url | Invoke-Expression
+}
+
 # Excute powershell command
 function run {
     [CmdletBinding()]
@@ -210,7 +219,7 @@ function run {
     {
         "itt" { 
             Write-Host "ITT Relasse..."
-            irm https://raw.githubusercontent.com/emadadel4/ITT/main/itt.ps1 | iex
+            irm https://raw.githubusercontent.com/emadadel4/itt/main/itt.ps1 | iex
 
         }
 
