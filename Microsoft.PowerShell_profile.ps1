@@ -193,6 +193,7 @@ function help {
     Write-Host "  run          Execute specific commands"
     Write-Host "  itt          Launch itt"
     Write-Host "  search       Search on DuckDuckGo"
+    Write-Host "  gog          Search on Google"
     Write-Host "  kill         End program"
     Write-Host "  rex          Restart explorer"
     Write-Host "  dark         Toggle dark mode"
@@ -315,6 +316,7 @@ function install {
 function search {
     [CmdletBinding()]
     param (
+        [Parameter(ValueFromRemainingArguments = $true)]
         [string]$Search = $null
     )
     
