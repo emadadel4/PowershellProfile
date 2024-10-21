@@ -191,6 +191,7 @@ function help {
     Write-Host "  install      Install program's using choco"
     Write-Host "  help         Display this help message."
     Write-Host "  run          Execute specific commands"
+    Write-Host "  itt          Launch itt"
     Write-Host "  search       Search on DuckDuckGo"
     Write-Host "  kill         End program"
     Write-Host "  rex          Restart explorer"
