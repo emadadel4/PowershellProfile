@@ -79,6 +79,7 @@ function 13x {
    
     [CmdletBinding()]
     param (
+        [Parameter(ValueFromRemainingArguments = $true)]
         [string]$Search = $null
     )
     
@@ -105,6 +106,7 @@ function fitgirl {
    
     [CmdletBinding()]
     param (
+        [Parameter(ValueFromRemainingArguments = $true)]
         [string]$Search = $null
     )
     
@@ -131,6 +133,7 @@ function yt {
    
     [CmdletBinding()]
     param (
+        [Parameter(ValueFromRemainingArguments = $true)]
         [string]$Search = $null
     )
     
@@ -156,6 +159,7 @@ function gog {
    
     [CmdletBinding()]
     param (
+        [Parameter(ValueFromRemainingArguments = $true)]
         [string]$Search = $null
     )
     
@@ -188,7 +192,8 @@ function help {
     Write-Host "  help         Display this help message."
     Write-Host "  run          Execute specific commands"
     Write-Host "  search       Search on DuckDuckGo"
-    Write-Host "  kill         end program"
+    Write-Host "  kill         End program"
+    Write-Host "  rex          Restart explorer"
     Write-Host "  dark         Toggle dark mode"
     Write-Host "  ch           Clear commands history"
     Write-Host "  q            Clear-Host"
@@ -343,7 +348,6 @@ function kill {
     }
 }
 
-
 # Clear history commands
 function ch {
 
@@ -437,6 +441,10 @@ function Dark {
     catch {
         Write-Host "Error: $($_.Exception.Message)"
     }
+}
+
+function rex {
+    Stop-Process -Name explorer
 }
 
 # System Information
