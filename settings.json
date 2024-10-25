@@ -50,7 +50,7 @@
         "defaults": 
         {
             "antialiasingMode": "cleartype",
-            "colorScheme": "VibrantInk",
+            "colorScheme": "Kali Black and Green",
             "elevate": true,
             "font": 
             {
@@ -111,6 +111,29 @@
             "selectionBackground": "#4A4543",
             "white": "#A5A2A2",
             "yellow": "#FDED02"
+        },
+        {
+            "background": "#000000",
+            "black": "#000000",
+            "blue": "#0000FF",
+            "brightBlack": "#808080",
+            "brightBlue": "#5C5CFF",
+            "brightCyan": "#5CFFFF",
+            "brightGreen": "#5FFF5F",
+            "brightPurple": "#FF5CFF",
+            "brightRed": "#FF5C5C",
+            "brightWhite": "#FFFFFF",
+            "brightYellow": "#FFFF5C",
+            "cursorColor": "#FFFFFF",
+            "cyan": "#00FFFF",
+            "foreground": "#00FF00",
+            "green": "#00FF00",
+            "name": "Kali Black and Green",
+            "purple": "#800080",
+            "red": "#FF0000",
+            "selectionBackground": "#FFFFFF",
+            "white": "#FFFFFF",
+            "yellow": "#FFFF00"
         },
         {
             "background": "#000000",
