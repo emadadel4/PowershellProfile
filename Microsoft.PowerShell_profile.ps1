@@ -196,12 +196,13 @@ function help {
     Write-Host "  gog          Search on Google"
     Write-Host "  kill         End program"
     Write-Host "  rex          Restart explorer"
+    Write-Host "  Re           Opening Recycle bin"
     Write-Host "  dark         Toggle dark mode"
     Write-Host "  ch           Clear commands history"
     Write-Host "  q            Clear-Host"
 }
 
-function itt {
+function aaaaaaaa {
     param (
         [string]$url = "https://raw.githubusercontent.com/emadadel4/itt/main/itt.ps1"
     )
@@ -219,7 +220,7 @@ function run {
 
     switch ($run) 
     {
-        "itt" { 
+        "aaaaaaaaaaa" { 
             Write-Host "ITT Relasse..."
             irm https://raw.githubusercontent.com/emadadel4/itt/main/itt.ps1 | iex
 
@@ -461,3 +462,5 @@ function rex {
 
 # System Information
 function sysinfo { Get-ComputerInfo }
+
+function Re { Add-Log -Message "Opening Recycle bin..." -Level "info"; Start-Process C:\Windows\explorer.exe shell:RecycleBinFolder}
