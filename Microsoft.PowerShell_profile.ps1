@@ -460,6 +460,27 @@ function rex {
     Stop-Process -Name explorer
 }
 
+function Safe-Mode {
+
+
+    $userInput = Read-Host "Do you want to boot into Safe Mode (Yes/No)"
+
+    if ($userInput -eq "Yes") {
+        # Enable Safe Mode without networking
+        bcdedit /set {current} safeboot minimal
+    
+        # Restart the computer
+        Write-Host "Your computer will restart and boot into Safe Mode (without Networking)."
+        Restart-Computer
+    }
+    elseif ($userInput -eq "No") {
+        Write-Host "Safe Mode will not be enabled. No changes were made."
+    }
+    else {
+        Write-Host "Invalid input. Please type 'Yes' or 'No'."
+    }
+}
+
 # System Information
 function sysinfo { Get-ComputerInfo }
 
