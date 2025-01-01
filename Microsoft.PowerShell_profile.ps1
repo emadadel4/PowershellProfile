@@ -1,6 +1,5 @@
 
-if (-not (Get-Command choco -ErrorAction SilentlyContinue)) 
-{
+if (-not (Get-Command choco -ErrorAction SilentlyContinue)) {
     Write-Host "Setup my powershell profile... " -ForegroundColor Yellow
     Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
     choco install oh-my-posh --confirm --acceptlicense -q -r --ignore-http-cache --allowemptychecksumsecure --allowemptychecksum --usepackagecodes --ignoredetectedreboot --ignore-checksums --ignore-reboot-requests
@@ -10,20 +9,20 @@ if (-not (Get-Command choco -ErrorAction SilentlyContinue))
 
 & ([ScriptBlock]::Create((oh-my-posh init pwsh --config "$env:POSH_THEMES_PATH\kali.omp.json" --print) -join "`n"))
 
-    # if (-not (Get-Module -Name Terminal-Icons -ListAvailable)) {
-    #     Install-Module -Name Terminal-Icons -Repository PSGallery
-    # }
-    # else
-    # {
-    #     Import-Module -Name Terminal-Icons
-    # }
+# if (-not (Get-Module -Name Terminal-Icons -ListAvailable)) {
+#     Install-Module -Name Terminal-Icons -Repository PSGallery
+# }
+# else
+# {
+#     Import-Module -Name Terminal-Icons
+# }
 
-    Import-Module PSReadLine
+Import-Module PSReadLine
 
-    Set-Alias ll Get-ChildItem
-    Set-Alias cls Clear-Host
+Set-Alias ll Get-ChildItem
+Set-Alias cls Clear-Host
 
-    Write-Host "
+Write-Host "
 
     Welcome 
     ______ __  __    _    ____          
@@ -68,7 +67,7 @@ function Add-Log {
     }
 
     # Construct the log message
-    $logMessage =  "[$icon] $Message"
+    $logMessage = "[$icon] $Message"
 
     # Write the log message to the console with the specified color
     Write-Host "$logMessage" -ForegroundColor $color
@@ -86,7 +85,8 @@ function 13x {
     if ($Search) {
         if (-not $Search.Trim()) {
             Write-Host "Please provide a search query."
-        } else {
+        }
+        else {
             # Encode the search query for use in a URL
             $encodedQuery = [System.Web.HttpUtility]::UrlEncode($Search)
 
@@ -96,13 +96,14 @@ function 13x {
             # Open the search results in the default web browser
             Start-Process $url
         }
-    }else {
+    }
+    else {
         Write-Host "usage: [<13x>] [<search query>]  `n` "
     }
 
 }
 
-function fitgirl {
+function fg {
    
     [CmdletBinding()]
     param (
@@ -113,7 +114,8 @@ function fitgirl {
     if ($Search) {
         if (-not $Search.Trim()) {
             Write-Host "Please provide a search query."
-        } else {
+        }
+        else {
             # Encode the search query for use in a URL
             $encodedQuery = [System.Web.HttpUtility]::UrlEncode($Search)
 
@@ -123,7 +125,8 @@ function fitgirl {
             # Open the search results in the default web browser
             Start-Process $url
         }
-    }else {
+    }
+    else {
         Write-Host "usage: [<fitgirl>] [<search query>]  `n` "
     }
 
@@ -140,7 +143,8 @@ function yt {
     if ($Search) {
         if (-not $Search.Trim()) {
             Write-Host "Please provide a search query."
-        } else {
+        }
+        else {
             # Encode the search query for use in a URL
             $encodedQuery = [System.Web.HttpUtility]::UrlEncode($Search)
 
@@ -150,7 +154,8 @@ function yt {
             # Open the search results in the default web browser
             Start-Process $url
         }
-    }else {
+    }
+    else {
         Write-Host "usage: [<yt>] [<search query>]  `n` "
     }
 }
@@ -166,7 +171,8 @@ function gog {
     if ($Search) {
         if (-not $Search.Trim()) {
             Write-Host "Please provide a search query."
-        } else {
+        }
+        else {
             # Encode the search query for use in a URL
             $encodedQuery = [System.Web.HttpUtility]::UrlEncode($Search)
 
@@ -176,7 +182,8 @@ function gog {
             # Open the search results in the default web browser
             Start-Process $url
         }
-    }else {
+    }
+    else {
         Write-Host "usage: [<gog>] [<search query>]  `n` "
     }
 }
@@ -191,9 +198,11 @@ function help {
     Write-Host "  install      Install program's using choco"
     Write-Host "  help         Display this help message."
     Write-Host "  run          Execute specific commands"
-    Write-Host "  itt          Launch itt"
-    Write-Host "  search       Search on DuckDuckGo"
-    Write-Host "  gog          Search on Google"
+    Write-Host "  itt          Launch itt (Install Tweaks Tool)"
+    Write-Host "  search       Search in DuckDuckGo"
+    Write-Host "  gog          Search in Google"
+    Write-Host "  fg           Search in fitgirl repacks"
+    Write-Host "  13x          Search in 1337x"
     Write-Host "  kill         End program"
     Write-Host "  rex          Restart explorer"
     Write-Host "  Re           Opening Recycle bin"
@@ -202,7 +211,7 @@ function help {
     Write-Host "  q            Clear-Host"
 }
 
-function aaaaaaaa {
+function itt {
     param (
         [string]$url = "https://raw.githubusercontent.com/emadadel4/itt/main/itt.ps1"
     )
@@ -218,9 +227,8 @@ function run {
         [string]$run
     )
 
-    switch ($run) 
-    {
-        "aaaaaaaaaaa" { 
+    switch ($run) {
+        "itt" { 
             Write-Host "ITT Relasse..."
             irm https://raw.githubusercontent.com/emadadel4/itt/main/itt.ps1 | iex
 
@@ -242,8 +250,7 @@ function open {
         [string]$open
     )
     
-    switch ($open) 
-    {
+    switch ($open) {
         "github" { 
             Start-Process ("https://github.com/emadadel4") 
         }
@@ -267,7 +274,7 @@ function open {
         "exhdd" { 
             Start-Process ("D:\") 
         }
-        "gmail"{
+        "gmail" {
             Start-Process ("https://mail.google.com/mail/u/0/") 
         }
     }
@@ -280,8 +287,7 @@ function jump {
         [string]$jump   
     )
 
-    switch ($jump) 
-    {
+    switch ($jump) {
         "desktop" { 
             Set-Location "C:\Users\$env:USERNAME\Desktop"
         }
@@ -304,8 +310,7 @@ function install {
         [string]$Install
     )
 
-    switch ($Install) 
-    {
+    switch ($Install) {
         "choco" { 
             Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1')) *> $null
         }
@@ -324,7 +329,8 @@ function search {
     if ($Search) {
         if (-not $Search.Trim()) {
             Write-Host "Please provide a search query."
-        } else {
+        }
+        else {
             # Encode the search query for use in a URL
             $encodedQuery = [System.Web.HttpUtility]::UrlEncode($Search)
 
@@ -338,13 +344,13 @@ function search {
 }
 
 # Clear Host
-function Q{
+function Q {
     Clear-Host
     & $profile
 }
 
 # kill Process
-function kill {
+function killit {
     param (
         [string]$name
     )
@@ -369,7 +375,8 @@ function ch {
     if (Test-Path $historyFilePath) {
         Remove-Item $historyFilePath -Force
         Add-Log -Message "History Claerd" -Level "Info"
-    } else {
+    }
+    else {
         Write-Output "ConsoleHost_history.txt not found."
     }
 }
@@ -383,8 +390,8 @@ function cc {
     )
 
     try {
-         Copy-Item -Path "$doc\*.ps1" -Destination "$github\" -Force
-         Add-Log -Message "Copied" -Level "INFO"
+        Copy-Item -Path "$doc\*.ps1" -Destination "$github\" -Force
+        Add-Log -Message "Copied" -Level "INFO"
     }
     catch {
 
@@ -394,7 +401,7 @@ function cc {
 }
 
 # Get hidden files in folders
-function lh {Get-ChildItem -Path . -Force -Hidden | Format-Table -AutoSize }
+function lh { Get-ChildItem -Path . -Force -Hidden | Format-Table -AutoSize }
 
 # open file with notepad.
 function np {
@@ -467,7 +474,7 @@ function Safe-Mode {
 
     if ($userInput -eq "Yes") {
         # Enable Safe Mode without networking
-        bcdedit /set {current} safeboot minimal
+        bcdedit /set { current } safeboot minimal
     
         # Restart the computer
         Write-Host "Your computer will restart and boot into Safe Mode (without Networking)."
@@ -484,4 +491,4 @@ function Safe-Mode {
 # System Information
 function sysinfo { Get-ComputerInfo }
 
-function Re { Add-Log -Message "Opening Recycle bin..." -Level "info"; Start-Process C:\Windows\explorer.exe shell:RecycleBinFolder}
+function Re { Add-Log -Message "Opening Recycle bin..." -Level "info"; Start-Process C:\Windows\explorer.exe shell:RecycleBinFolder }
