@@ -1,4 +1,3 @@
-
 if (-not (Get-Command choco -ErrorAction SilentlyContinue)) {
     Write-Host "Setup my powershell profile... " -ForegroundColor Yellow
     Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
@@ -6,25 +5,19 @@ if (-not (Get-Command choco -ErrorAction SilentlyContinue)) {
     #Write-Output "Restart the treminal "
     Clear-Host
 }
-
 & ([ScriptBlock]::Create((oh-my-posh init pwsh --config "$env:POSH_THEMES_PATH\kali.omp.json" --print) -join "`n"))
 
-# if (-not (Get-Module -Name Terminal-Icons -ListAvailable)) {
-#     Install-Module -Name Terminal-Icons -Repository PSGallery
-# }
-# else
-# {
-#     Import-Module -Name Terminal-Icons
-# }
-
+if (-not (Get-Module -Name Terminal-Icons -ListAvailable)) {
+    Install-Module -Name Terminal-Icons -Repository PSGallery
+}
+else {
+    Import-Module -Name Terminal-Icons
+}
 Import-Module PSReadLine
-
 Set-Alias ll Get-ChildItem
 Set-Alias cls Clear-Host
-
 Write-Host "
-
-    Welcome 
+    Welcome!
     ______ __  __    _    ____          
     | ____|  \/  |  / \  |  _ \    
     |  _| | |\/| | / _ \ | | | |   
@@ -32,9 +25,7 @@ Write-Host "
     |_____|_|  |_/_/   \_\____/  
 
     01000101 01001101 01000001 01000100
-
 " -ForegroundColor Yellow
-
 
 function Add-Log {
 
@@ -73,15 +64,38 @@ function Add-Log {
     Write-Host "$logMessage" -ForegroundColor $color
 
 }
+# Show help
+function help {
 
+    Write-Host "usage: [<command>] [<options>]  `n` "
+    Write-Host "The following commands are available:"
+    Write-Host "  open         Specifies where to navigate. Available options: 'github' or 'itt' or 'telegram' 'exhdd' 'fast' 'yts' 'doc' 'gmail' 'blog'"
+    Write-Host "  jump         Specifies where to navigate. Available options: 'desktop' or 'itt' 'blog' 'profile'."
+    Write-Host "  help         Display this help message."
+    Write-Host "  run          Execute specific commands"
+    Write-Host "  itt          Launch itt (Install Tweaks Tool)"
+    Write-Host "  search       Search via DuckDuckGo"
+    Write-Host "  gog          Search via Google"
+    Write-Host "  fg           Search via fitgirl repacks"
+    Write-Host "  13x          Search via 1337x"
+    Write-Host "  kill         End program"
+    Write-Host "  rex          Restart explorer"
+    Write-Host "  Re           Opening Recycle bin"
+    Write-Host "  dark         Toggle dark mode"
+    Write-Host "  cch          Clear commands history"
+    Write-Host "  q            Clear-Host"
+}
 function 13x {
-   
     [CmdletBinding()]
     param (
         [Parameter(ValueFromRemainingArguments = $true)]
-        [string]$Search = $null
+        [string]$Search = $null,
+        [switch]$Help
     )
-    
+    if ($Help) {
+        Add-Log -Message "usage: 13x <query>" -Level "INFO"
+        return
+    }
     if ($Search) {
         if (-not $Search.Trim()) {
             Write-Host "Please provide a search query."
@@ -102,15 +116,17 @@ function 13x {
     }
 
 }
-
 function fg {
-   
     [CmdletBinding()]
     param (
         [Parameter(ValueFromRemainingArguments = $true)]
-        [string]$Search = $null
+        [string]$Search = $null,
+        [switch]$Help
     )
-    
+    if ($Help) {
+        Add-Log -Message "usage: fg <query>" -Level "INFO"
+        return
+    }
     if ($Search) {
         if (-not $Search.Trim()) {
             Write-Host "Please provide a search query."
@@ -131,15 +147,17 @@ function fg {
     }
 
 }
-
 function yt {
-   
     [CmdletBinding()]
     param (
         [Parameter(ValueFromRemainingArguments = $true)]
-        [string]$Search = $null
+        [string]$Search = $null,
+        [switch]$Help
     )
-    
+    if ($Help) {
+        Add-Log -Message "usage: yt <query>" -Level "INFO"
+        return
+    }
     if ($Search) {
         if (-not $Search.Trim()) {
             Write-Host "Please provide a search query."
@@ -159,14 +177,20 @@ function yt {
         Write-Host "usage: [<yt>] [<search query>]  `n` "
     }
 }
-
 function gog {
    
     [CmdletBinding()]
     param (
         [Parameter(ValueFromRemainingArguments = $true)]
-        [string]$Search = $null
+        [string]$Search = $null,
+        [switch]$Help
     )
+
+   
+    if ($Help) {
+        Add-Log -Message "usage: gog <query>" -Level "INFO"
+        return
+    }
     
     if ($Search) {
         if (-not $Search.Trim()) {
@@ -187,30 +211,6 @@ function gog {
         Write-Host "usage: [<gog>] [<search query>]  `n` "
     }
 }
-
-# Show help
-function help {
-
-    Write-Host "usage: [<command>] [<options>]  `n` "
-    Write-Host "The following commands are available:"
-    Write-Host "  open         Specifies where to navigate. Available options: 'github' or 'itt' or 'telegram' 'exhdd'"
-    Write-Host "  jump         Specifies where to navigate. Available options: 'desktop' or 'itt repo'."
-    Write-Host "  install      Install program's using choco"
-    Write-Host "  help         Display this help message."
-    Write-Host "  run          Execute specific commands"
-    Write-Host "  itt          Launch itt (Install Tweaks Tool)"
-    Write-Host "  search       Search in DuckDuckGo"
-    Write-Host "  gog          Search in Google"
-    Write-Host "  fg           Search in fitgirl repacks"
-    Write-Host "  13x          Search in 1337x"
-    Write-Host "  kill         End program"
-    Write-Host "  rex          Restart explorer"
-    Write-Host "  Re           Opening Recycle bin"
-    Write-Host "  dark         Toggle dark mode"
-    Write-Host "  ch           Clear commands history"
-    Write-Host "  q            Clear-Host"
-}
-
 function itt {
     param (
         [string]$url = "https://raw.githubusercontent.com/emadadel4/itt/main/itt.ps1"
@@ -219,13 +219,18 @@ function itt {
     Add-Log -Message "Launch itt..." -Level "info"
     Invoke-RestMethod $url | Invoke-Expression
 }
-
 # Excute powershell command
 function run {
     [CmdletBinding()]
     param (
-        [string]$run
+        [string]$run,
+        [switch]$Help
     )
+
+    if ($Help) {
+        Add-Log -Message "usage: run available options <itt>,<ittupdate>" -Level "INFO"
+        return
+    }
 
     switch ($run) {
         "itt" { 
@@ -242,13 +247,18 @@ function run {
     }
     
 }
-
-# open folder or url etc..
+# Open folder or url etc..
 function open {
     [CmdletBinding()]
     param (
-        [string]$open
+        [string]$open,
+        [switch]$Help
     )
+
+    if ($Help) {
+        Add-Log -Message "usage: open available options <github>,<itt>,<telegram>,<blog>,<fast>,<yt>,<doc>,<gmail>" -Level "INFO"
+        return
+    }
     
     switch ($open) {
         "github" { 
@@ -279,14 +289,17 @@ function open {
         }
     }
 }
-
-# jump to folder
+# Jump to specific folder.
 function jump {
     [CmdletBinding()]
     param (
-        [string]$jump   
+        [string]$jump,
+        [switch]$Help
     )
-
+    if ($Help) {
+        Add-Log -Message "usage: jump available options <Desktop>,<itt>,<blog>,<profile>" -Level "INFO"
+        return
+    }
     switch ($jump) {
         "desktop" { 
             Set-Location "C:\Users\$env:USERNAME\Desktop"
@@ -302,29 +315,19 @@ function jump {
         }
     }
 }
-
-# install choco
-function install {
-
-    param(
-        [string]$Install
-    )
-
-    switch ($Install) {
-        "choco" { 
-            Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1')) *> $null
-        }
-    }
-    
-}
-
-# search based on duckduck go engine
+# Search based on specific search engine.
 function search {
     [CmdletBinding()]
     param (
         [Parameter(ValueFromRemainingArguments = $true)]
-        [string]$Search = $null
+        [string]$Search = $null,
+        [switch]$Help
     )
+
+    if ($Help) {
+        Add-Log -Message "usage: search <query>" -Level "INFO"
+        return
+    }
     
     if ($Search) {
         if (-not $Search.Trim()) {
@@ -342,18 +345,22 @@ function search {
         }
     }
 }
-
 # Clear Host
 function Q {
     Clear-Host
     & $profile
 }
-
 # kill Process
 function killit {
     param (
-        [string]$name
+        [string]$name,
+        [switch]$Help
     )
+
+    if ($Help) {
+        Add-Log -Message "usage: killit <process name>" -Level "INFO"
+        return
+    }
 
     try {
         # Attempt to get and stop the process
@@ -366,9 +373,8 @@ function killit {
         Add-Log -Message "Failed to create file '$name'. Error: $_" -Level "ERROR"
     }
 }
-
-# Clear history commands
-function ch {
+# Clear commands history 
+function cch {
 
     $historyFilePath = "$env:USERPROFILE\AppData\Roaming\Microsoft\Windows\PowerShell\PSReadLine\ConsoleHost_history.txt"
     
@@ -380,10 +386,8 @@ function ch {
         Write-Output "ConsoleHost_history.txt not found."
     }
 }
-
 # Copy powrshell profile to github repo folder
 function cc {
-
     param(
         [string]$github = "C:\Users\$env:USERNAME\Documents\GitHub\PowershellProfile\",
         [string]$doc = "C:\Users\$env:USERNAME\Documents\PowerShell\"
@@ -397,24 +401,40 @@ function cc {
 
         Write-Error "Failed copy Microsoft.PowerShell_profile.ps1 $_"
     }
-
 }
-
 # Get hidden files in folders
 function lh { Get-ChildItem -Path . -Force -Hidden | Format-Table -AutoSize }
 
 # open file with notepad.
 function np {
-    param($name)
-    notepad.exe $name
-}
+    param(
+        $name,
+        [switch]$Help
+    )
 
+    if ($Help) {
+        Add-Log -Message "usage: np <filename.txt>" -Level "INFO"
+        return
+    }
+    
+    try {
+        notepad.exe $name
+    }
+    catch {
+        Write-Error "Error: $_"
+    }
+}
 # make a new file
 function touch {
     param (
-        [string]$name
+        [string]$name,
+        [switch]$Help
     )
 
+    if ($Help) {
+        Add-Log -Message "usage: touch <filename.txt>" -Level "INFO"
+        return
+    }
     try {
         # Attempt to create the file
         New-Item -ItemType "file" -Path . -Name $name -ErrorAction Stop
@@ -425,7 +445,6 @@ function touch {
         Write-Host "Failed to create file '$name'. Error: $_" -ForegroundColor Red
     }
 }
-
 # Enable & Disable Dark mode
 function Dark {
     param (
@@ -462,20 +481,14 @@ function Dark {
         Write-Host "Error: $($_.Exception.Message)"
     }
 }
-
 function rex {
     Stop-Process -Name explorer
 }
-
 function Safe-Mode {
-
-
     $userInput = Read-Host "Do you want to boot into Safe Mode (Yes/No)"
-
     if ($userInput -eq "Yes") {
         # Enable Safe Mode without networking
         bcdedit /set { current } safeboot minimal
-    
         # Restart the computer
         Write-Host "Your computer will restart and boot into Safe Mode (without Networking)."
         Restart-Computer
@@ -487,8 +500,6 @@ function Safe-Mode {
         Write-Host "Invalid input. Please type 'Yes' or 'No'."
     }
 }
-
 # System Information
 function sysinfo { Get-ComputerInfo }
-
 function Re { Add-Log -Message "Opening Recycle bin..." -Level "info"; Start-Process C:\Windows\explorer.exe shell:RecycleBinFolder }
