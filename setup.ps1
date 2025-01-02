@@ -1,3 +1,4 @@
+param([Switch]Update)
 if (-NOT ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) {
     Write-Warning "You must run this script as an Administrator!"
     break
@@ -132,6 +133,12 @@ function CheckPSV {
     {
         Write-Host "You are using the latest version of PowerShell: $current"
     }
+}
+
+
+if($Update)
+{
+    Write-Host "Working"
 }
 
 Install-Choco | Out-Null
