@@ -87,7 +87,7 @@
                 "face": "JetBrains Mono"
             },
             "padding": "25",
-            "startingDirectory": "C:\\Users\\Emad Adel\\Documents\\GitHub\\itt"
+            "startingDirectory": "%USERPROFILE%\\Documents"
         },
         "list": 
         [
