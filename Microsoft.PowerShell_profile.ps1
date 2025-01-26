@@ -1,10 +1,3 @@
-if (-not (Get-Command choco -ErrorAction SilentlyContinue)) {
-    Write-Host "Setup my powershell profile... " -ForegroundColor Yellow
-    Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
-    choco install oh-my-posh --confirm --acceptlicense -q -r --ignore-http-cache --allowemptychecksumsecure --allowemptychecksum --usepackagecodes --ignoredetectedreboot --ignore-checksums --ignore-reboot-requests
-    #Write-Output "Restart the treminal "
-    Clear-Host
-}
 & ([ScriptBlock]::Create((oh-my-posh init pwsh --config "$env:POSH_THEMES_PATH\kali.omp.json" --print) -join "`n"))
 
 if (-not (Get-Module -Name Terminal-Icons -ListAvailable)) {
@@ -24,7 +17,7 @@ Write-Host "
     | |___| |  | |/ ___ \| |_| |  
     |_____|_|  |_/_/   \_\____/  
 
-    01000101 01001101 01000001 01000100
+    Are you 0 or 1 ?
 " -ForegroundColor Yellow
 
 function Add-Log {
@@ -58,7 +51,7 @@ function Add-Log {
     }
 
     # Construct the log message
-    $logMessage = "[$icon] $Message"
+    $logMessage = "$Message"
 
     # Write the log message to the console with the specified color
     Write-Host "$logMessage" -ForegroundColor $color
@@ -67,23 +60,23 @@ function Add-Log {
 # Show help
 function help {
 
-    Write-Host "usage: [<command>] [<options>]  `n` "
+    Write-Host "`n`Usage: [<command>] [<options>]`n` "
     Write-Host "The following commands are available:"
-    Write-Host "  open         Specifies where to navigate. Available options: 'github' or 'itt' or 'telegram' 'exhdd' 'fast' 'yts' 'doc' 'gmail' 'blog'"
-    Write-Host "  jump         Specifies where to navigate. Available options: 'desktop' or 'itt' 'blog' 'profile'."
-    Write-Host "  help         Display this help message."
-    Write-Host "  run          Execute specific commands"
-    Write-Host "  itt          Launch itt (Install Tweaks Tool)"
-    Write-Host "  search       Search via DuckDuckGo"
-    Write-Host "  gog          Search via Google"
-    Write-Host "  fg           Search via fitgirl repacks"
-    Write-Host "  13x          Search via 1337x"
-    Write-Host "  kill         End program"
-    Write-Host "  rex          Restart explorer"
-    Write-Host "  Re           Opening Recycle bin"
-    Write-Host "  dark         Toggle dark mode"
-    Write-Host "  cch          Clear commands history"
-    Write-Host "  q            Clear-Host"
+    Write-Host "help         Display this help message."
+    Write-Host "open         Specifies where to navigate. Available options: <github>  <itt> <telegram> <fast> <yts> <doc> <gmail> <blog>"
+    Write-Host "jump         Specifies where to navigate. Available options: <desktop> <itt> <blog> <profile>"
+    Write-Host "run          Execute specific commands Available options: <itt> <ittupdate>"
+    Write-Host "itt          Launch itt (Install Tweaks Tool)"
+    Write-Host "search       Search via DuckDuckGo"
+    Write-Host "gog          Search via Google"
+    Write-Host "fg           Search via fitgirl repacks"
+    Write-Host "13x          Search via 1337x"
+    Write-Host "kill         End program"
+    Write-Host "rex          Restart explorer"
+    Write-Host "Re           Opening Recycle bin"
+    Write-Host "dark         Toggle dark mode"
+    Write-Host "cch          Clear commands history"
+    Write-Host "q            Clear-Host"
 }
 function 13x {
     [CmdletBinding()]
@@ -92,10 +85,12 @@ function 13x {
         [string]$Search = $null,
         [switch]$Help
     )
+
     if ($Help) {
-        Add-Log -Message "usage: 13x <query>" -Level "INFO"
+        Add-Log -Message "Usage: [<13x>] [<search query>]" -Level "INFO"
         return
     }
+    
     if ($Search) {
         if (-not $Search.Trim()) {
             Write-Host "Please provide a search query."
@@ -111,10 +106,6 @@ function 13x {
             Start-Process $url
         }
     }
-    else {
-        Write-Host "usage: [<13x>] [<search query>]  `n` "
-    }
-
 }
 function fg {
     [CmdletBinding()]
@@ -124,7 +115,7 @@ function fg {
         [switch]$Help
     )
     if ($Help) {
-        Add-Log -Message "usage: fg <query>" -Level "INFO"
+        Add-Log -Message "Usage: [<fitgirl>] [<search query>]" -Level "INFO"
         return
     }
     if ($Search) {
@@ -142,10 +133,6 @@ function fg {
             Start-Process $url
         }
     }
-    else {
-        Write-Host "usage: [<fitgirl>] [<search query>]  `n` "
-    }
-
 }
 function yt {
     [CmdletBinding()]
@@ -155,7 +142,7 @@ function yt {
         [switch]$Help
     )
     if ($Help) {
-        Add-Log -Message "usage: yt <query>" -Level "INFO"
+        Add-Log -Message "Usage: [<yt>] [<search query>]" -Level "INFO"
         return
     }
     if ($Search) {
@@ -173,9 +160,6 @@ function yt {
             Start-Process $url
         }
     }
-    else {
-        Write-Host "usage: [<yt>] [<search query>]  `n` "
-    }
 }
 function gog {
    
@@ -188,7 +172,7 @@ function gog {
 
    
     if ($Help) {
-        Add-Log -Message "usage: gog <query>" -Level "INFO"
+        Add-Log -Message "Usage: [<gog>] [<search query>]" -Level "INFO"
         return
     }
     
@@ -206,9 +190,6 @@ function gog {
             # Open the search results in the default web browser
             Start-Process $url
         }
-    }
-    else {
-        Write-Host "usage: [<gog>] [<search query>]  `n` "
     }
 }
 function itt {
@@ -228,7 +209,7 @@ function run {
     )
 
     if ($Help) {
-        Add-Log -Message "usage: run available options <itt>,<ittupdate>" -Level "INFO"
+        Add-Log -Message "Usage: [<run>] available options [<itt,ittupdate>]" -Level "INFO"
         return
     }
 
@@ -256,7 +237,7 @@ function open {
     )
 
     if ($Help) {
-        Add-Log -Message "usage: open available options <github>,<itt>,<telegram>,<blog>,<fast>,<yt>,<doc>,<gmail>" -Level "INFO"
+        Add-Log -Message "Usage: [<open>] available options [<github,itt,blog,fast,yt,doc,gmail>]" -Level "INFO"
         return
     }
     
@@ -266,9 +247,6 @@ function open {
         }
         "itt" { 
             Start-Process ("https://github.com/emadadel4/itt") 
-        }
-        "telegram" { 
-            Start-Process ("https://t.me/emadadel4") 
         }
         "blog" { 
             Start-Process ("https://emadadel4.github.io/") 
@@ -280,9 +258,6 @@ function open {
         }
         "doc" { 
             Start-Process ("C:\Users\$env:USERNAME\Documents") 
-        }
-        "exhdd" { 
-            Start-Process ("D:\") 
         }
         "gmail" {
             Start-Process ("https://mail.google.com/mail/u/0/") 
@@ -297,7 +272,7 @@ function jump {
         [switch]$Help
     )
     if ($Help) {
-        Add-Log -Message "usage: jump available options <Desktop>,<itt>,<blog>,<profile>" -Level "INFO"
+        Add-Log -Message "Usage: [<jump>] available options [<Desktop,itt,blog,profile>]" -Level "INFO"
         return
     }
     switch ($jump) {
@@ -325,7 +300,7 @@ function search {
     )
 
     if ($Help) {
-        Add-Log -Message "usage: search <query>" -Level "INFO"
+        Add-Log -Message "Usage: [<search>] [<search query>]" -Level "INFO"
         return
     }
     
@@ -358,7 +333,7 @@ function killit {
     )
 
     if ($Help) {
-        Add-Log -Message "usage: killit <process name>" -Level "INFO"
+        Add-Log -Message "Usage: [<killit>] [<process name>]" -Level "INFO"
         return
     }
 
@@ -413,7 +388,7 @@ function np {
     )
 
     if ($Help) {
-        Add-Log -Message "usage: np <filename.txt>" -Level "INFO"
+        Add-Log -Message "Usage: np <filename.txt>" -Level "INFO"
         return
     }
     
@@ -432,7 +407,7 @@ function touch {
     )
 
     if ($Help) {
-        Add-Log -Message "usage: touch <filename.txt>" -Level "INFO"
+        Add-Log -Message "Usage: touch <filename.txt>" -Level "INFO"
         return
     }
     try {
