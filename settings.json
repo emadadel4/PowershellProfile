@@ -4,9 +4,6 @@
     "actions": 
     [
         {
-            "command": "unbound"
-        },
-        {
             "command": 
             {
                 "action": "copy",
@@ -16,9 +13,22 @@
             "keys": "ctrl+c"
         },
         {
+            "command": "unbound",
+            "keys": "ctrl+shift+s"
+        },
+        {
             "command": "paste",
             "id": "User.paste",
             "keys": "ctrl+v"
+        },
+        {
+            "command": 
+            {
+                "action": "splitPane",
+                "split": "down",
+                "splitMode": "duplicate"
+            },
+            "id": "User.splitPane.10B260D2"
         },
         {
             "command": "find",
@@ -28,6 +38,24 @@
         {
             "command": "find",
             "keys": "ctrl+f"
+        },
+        {
+            "command": 
+            {
+                "action": "swapPane",
+                "direction": "left"
+            },
+            "id": "User.swapPane.2A0DA8E0"
+        },
+        {
+            "command": 
+            {
+                "action": "splitPane",
+                "split": "auto",
+                "splitMode": "duplicate"
+            },
+            "id": "User.splitPane.A6751878",
+            "keys": "alt+shift+d"
         },
         {
             "command": 
@@ -45,14 +73,16 @@
             "keys": "ctrl+t"
         },
         {
+            "command": "toggleShaderEffects",
+            "id": "User.toggleShaderEffects"
+        },
+        {
             "command": 
             {
-                "action": "splitPane",
-                "split": "auto",
-                "splitMode": "duplicate"
+                "action": "splitPane"
             },
-            "id": "User.splitPane.A6751878",
-            "keys": "alt+shift+d"
+            "id": "User.splitPane.91AB55B1",
+            "keys": "ctrl+x"
         },
         {
             "command": 
@@ -60,15 +90,28 @@
                 "action": "closeTab"
             },
             "id": "User.closeTab.0",
-            "keys": "ctrl+x"
+            "keys": "ctrl+shift+x"
+        },
+        {
+            "command": 
+            {
+                "action": "splitPane",
+                "split": "right",
+                "splitMode": "duplicate"
+            },
+            "id": "User.splitPane.FEF0D40B"
+        },
+        {
+            "command": "toggleSplitOrientation",
+            "id": "User.toggleSplitOrientation"
         }
     ],
     "copyFormatting": "none",
     "copyOnSelect": false,
     "defaultProfile": "{574e775e-4f2a-5b96-ac1e-a2962a402336}",
-    "initialCols": 80,
+    "initialCols": 90,
     "initialPosition": "15,15",
-    "initialRows": 20,
+    "initialRows": 25,
     "newTabMenu": 
     [
         {
@@ -80,14 +123,16 @@
         "defaults": 
         {
             "antialiasingMode": "grayscale",
-            "colorScheme": "Kali Black and Green",
+            "colorScheme": "One Half Dark",
             "elevate": true,
+            "experimental.retroTerminalEffect": false,
             "font": 
             {
                 "face": "JetBrains Mono"
             },
             "padding": "25",
-            "startingDirectory": "%USERPROFILE%\\Documents"
+            "startingDirectory": "%USERPROFILE%\\Documents",
+            "useAcrylic": false
         },
         "list": 
         [
@@ -136,6 +181,18 @@
             },
             {
                 "guid": "{1b4f5deb-e137-5b48-a952-5294f3fe9dda}",
+                "hidden": false,
+                "name": "Developer PowerShell for VS 2022",
+                "source": "Windows.Terminal.VisualStudio"
+            },
+            {
+                "guid": "{e55fb11a-7dd4-5d89-b91a-33557c18b86b}",
+                "hidden": false,
+                "name": "Developer Command Prompt for VS 2022",
+                "source": "Windows.Terminal.VisualStudio"
+            },
+            {
+                "guid": "{6b27b867-877e-5218-b4af-4b9a0ffe616d}",
                 "hidden": false,
                 "name": "Developer PowerShell for VS 2022",
                 "source": "Windows.Terminal.VisualStudio"
