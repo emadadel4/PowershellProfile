@@ -106,8 +106,9 @@
             "id": "User.toggleSplitOrientation"
         }
     ],
+    "alwaysShowNotificationIcon": false,
     "copyFormatting": "none",
-    "copyOnSelect": false,
+    "copyOnSelect": true,
     "defaultProfile": "{574e775e-4f2a-5b96-ac1e-a2962a402336}",
     "initialCols": 90,
     "initialPosition": "15,15",
@@ -122,17 +123,28 @@
     {
         "defaults": 
         {
-            "antialiasingMode": "grayscale",
+            "adjustIndistinguishableColors": "always",
+            "antialiasingMode": "cleartype",
+            "backgroundImage": "F:\\Wallpaper\\the-batman-fan-made-4k-xx.jpg",
+            "backgroundImageOpacity": 0.19,
+            "backgroundImageStretchMode": "uniformToFill",
+            "bellStyle": 
+            [
+                "audible",
+                "window"
+            ],
             "colorScheme": "One Half Dark",
             "elevate": true,
             "experimental.retroTerminalEffect": false,
             "font": 
             {
-                "face": "JetBrains Mono"
+                "face": "JetBrains Mono",
+                "features": {}
             },
+            "opacity": 100,
             "padding": "25",
             "startingDirectory": "%USERPROFILE%\\Documents",
-            "useAcrylic": false
+            "useAcrylic": true
         },
         "list": 
         [
@@ -199,7 +211,7 @@
             }
         ]
     },
-    "rendering.graphicsAPI": "direct3d11",
+    "rendering.software": true,
     "schemes": 
     [
         {
@@ -295,5 +307,6 @@
             "yellow": "#FFCC00"
         }
     ],
-    "themes": []
+    "themes": [],
+    "useAcrylicInTabRow": true
 }
