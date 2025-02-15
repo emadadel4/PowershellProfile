@@ -95,7 +95,7 @@ function yt {
         [switch]$Help
     )
     if ($Help) {
-        Add-Log -Message "Usage: [<yt>] [<search query>]" -Level "INFO"
+        Write-Host "Usage: [<yt>] [<search query>]" -Level "INFO"
         return
     }
     if ($Search) {
@@ -150,7 +150,7 @@ function itt {
         [string]$url = "https://raw.githubusercontent.com/emadadel4/itt/main/itt.ps1"
     )
 
-    Add-Log -Message "Launch itt..." -Level "info"
+    Write-Host "Launch itt..."
     Invoke-RestMethod $url | Invoke-Expression
 }
 # Excute powershell command
@@ -162,7 +162,7 @@ function run {
     )
 
     if ($Help) {
-        Add-Log -Message "Usage: [<run>] available options [<itt,ittupdate>]" -Level "INFO"
+        Write-Host "Usage: [<run>] available options [<itt,ittupdate>]"
         return
     }
 
@@ -190,7 +190,7 @@ function open {
     )
 
     if ($Help) {
-        Add-Log -Message "Usage: [<open>] available options [<github,itt,blog,fast,yt,doc,gmail>]" -Level "INFO"
+        Write-Host "Usage: [<open>] available options [<github,itt,blog,fast,yt,doc,gmail>]" 
         return
     }
     
@@ -225,7 +225,7 @@ function jump {
         [switch]$Help
     )
     if ($Help) {
-        Add-Log -Message "Usage: [<jump>] available options [<Desktop,itt,blog,profile>]" -Level "INFO"
+        Write-Host "Usage: [<jump>] available options [<Desktop,itt,blog,profile>]" 
         return
     }
     switch ($jump) {
@@ -253,7 +253,7 @@ function search {
     )
 
     if ($Help) {
-        Add-Log -Message "Usage: [<search>] [<search query>]" -Level "INFO"
+        Write-Host "Usage: [<search>] [<search query>]" 
         return
     }
     
@@ -286,7 +286,7 @@ function killit {
     )
 
     if ($Help) {
-        Add-Log -Message "Usage: [<killit>] [<process name>]" -Level "INFO"
+        Write-Host "Usage: [<killit>] [<process name>]" 
         return
     }
 
@@ -294,11 +294,11 @@ function killit {
         # Attempt to get and stop the process
         $process = Get-Process -Name $name -ErrorAction Stop
         Stop-Process -InputObject $process -ErrorAction Stop
-        Add-Log -Message "Process '$name' stopped successfully." -Level "INFO"
+        Write-Host "Process '$name' stopped successfully." 
     }
     catch {
         # Handle any errors that occur
-        Add-Log -Message "Failed to create file '$name'. Error: $_" -Level "ERROR"
+        Write-Host "Failed to create file '$name'. Error: $_" 
     }
 }
 # Clear commands history 
@@ -308,7 +308,7 @@ function cch {
     
     if (Test-Path $historyFilePath) {
         Remove-Item $historyFilePath -Force
-        Add-Log -Message "History Claerd" -Level "Info"
+        Write-Host "History Claerd" 
     }
     else {
         Write-Output "ConsoleHost_history.txt not found."
@@ -323,7 +323,7 @@ function cc {
 
     try {
         Copy-Item -Path "$doc\*.ps1" -Destination "$github\" -Force
-        Add-Log -Message "Copied" -Level "INFO"
+        Write-Host "Copied" 
     }
     catch {
 
@@ -341,7 +341,7 @@ function np {
     )
 
     if ($Help) {
-        Add-Log -Message "Usage: np <filename.txt>" -Level "INFO"
+        Write-Host "Usage: np <filename.txt>" 
         return
     }
     
@@ -360,13 +360,13 @@ function touch {
     )
 
     if ($Help) {
-        Add-Log -Message "Usage: touch <filename.txt>" -Level "INFO"
+        Write-Host "Usage: touch <filename.txt>" 
         return
     }
     try {
         # Attempt to create the file
         New-Item -ItemType "file" -Path . -Name $name -ErrorAction Stop
-        Add-Log -Message "File '$name' created successfully." -Level "INFO"
+        Write-Host "File '$name' created successfully." 
     }
     catch {
         # Handle any errors that occur
@@ -430,4 +430,4 @@ function Safe-Mode {
 }
 # System Information
 function sysinfo { Get-ComputerInfo }
-function Re { Add-Log -Message "Opening Recycle bin..." -Level "info"; Start-Process C:\Windows\explorer.exe shell:RecycleBinFolder }
+function Re { Start-Process C:\Windows\explorer.exe shell:RecycleBinFolder }
