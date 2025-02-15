@@ -1,16 +1,5 @@
 & ([ScriptBlock]::Create((oh-my-posh init pwsh --config "$env:POSH_THEMES_PATH\kali.omp.json" --print) -join "`n"))
 
-if (-not (Get-Module -Name Terminal-Icons -ListAvailable)) {
-    Install-Module -Name Terminal-Icons -Repository PSGallery
-}
-else {
-    Import-Module -Name Terminal-Icons
-}
-Import-Module PSReadLine
-Set-Alias ll Get-ChildItem
-Set-Alias cls Clear-Host
-
-# Show help
 function help {
 
     Write-Host "`n`Usage: [<command>] [<options>]`n` "
